@@ -1,0 +1,79 @@
+aid: adapty
+name: Adapty
+review:
+  question: Does Adapty expose a documented public WebSocket API?
+  answer: false
+  date: '2026-07-01'
+  reviewer: API Evangelist
+  asyncapiSpecCreated: false
+  asyncapiScopeNote: |
+    Per API Evangelist scope, HTTP Server-Sent Events (SSE) is in-scope for
+    AsyncAPI modeling and WebSocket surfaces are modeled when documented.
+    Adapty's asynchronous/event surface is outbound HTTP webhooks, not SSE and
+    not WebSocket, so no AsyncAPI document was authored. Webhooks are listed as
+    a REST-adjacent surface in apis.yml (Adapty Webhooks) with Documentation and
+    APIReference properties pointing at the events reference.
+findings:
+  summary: |
+    Adapty does not publish a documented public WebSocket API. The product is a
+    mobile client SDK (iOS, Android, Flutter, React Native, Unity) plus a
+    supporting Server-Side REST API under
+    https://api.adapty.io/api/v2/server-side-api. Real-time subscription
+    lifecycle delivery to a customer's backend is handled by outbound HTTP
+    webhooks (Adapty POSTs events to your endpoint), not by a bidirectional or
+    streaming WebSocket (ws:// or wss://) connection. No SSE stream is documented
+    either. Authentication is a secret API key via the
+    `Authorization: Api-Key <secret_key>` header, with the profile addressed via
+    the `adapty-profile-id` or `adapty-customer-user-id` request headers.
+  transports:
+    - protocol: REST
+      scheme: https
+      baseURL: https://api.adapty.io/api/v2/server-side-api
+      documented: true
+    - protocol: Webhook
+      scheme: https
+      note: Outbound HTTP POST of subscription events from Adapty to a customer-provided endpoint. One-way server-to-server callback, not WebSocket.
+      documented: true
+    - protocol: SSE
+      scheme: https
+      documented: false
+      note: No Server-Sent Events stream is documented for the Server-Side API.
+    - protocol: WebSocket
+      scheme: wss
+      documented: false
+      note: No WebSocket endpoint is documented in Adapty's Server-Side API reference, SDK docs, or events/webhook docs as of the review date.
+  endpointsConfirmedRest:
+    - GET    https://api.adapty.io/api/v2/server-side-api/profile/
+    - POST   https://api.adapty.io/api/v2/server-side-api/profile/
+    - PATCH  https://api.adapty.io/api/v2/server-side-api/profile/
+    - DELETE https://api.adapty.io/api/v2/server-side-api/profile/
+    - POST   https://api.adapty.io/api/v2/server-side-api/purchase/set-transaction/
+    - POST   https://api.adapty.io/api/v2/server-side-api/purchase/stripe/
+    - POST   https://api.adapty.io/api/v2/server-side-api/purchase/profile/grant-access-level/
+    - POST   https://api.adapty.io/api/v2/server-side-api/purchase/profile/revoke-access-level/
+    - POST   https://api.adapty.io/api/v2/server-side-api/profile/integration-identifiers/
+    - GET    https://api.adapty.io/api/v2/server-side-api/paywalls/
+    - GET    https://api.adapty.io/api/v2/server-side-api/paywalls/{developer_id}/
+    - PATCH  https://api.adapty.io/api/v2/server-side-api/paywalls/{developer_id}/
+sources:
+  - url: https://adapty.io/docs/getting-started-with-server-side-api
+    type: Documentation
+    note: Server-Side API v2 getting started; authorization via Api-Key header and profile-id/customer-user-id headers. No WebSocket mentioned.
+  - url: https://adapty.io/docs/server-side-api-specs
+    type: APIReference
+    note: Lists v2 operations (profile CRUD, grant/revoke access level, set transaction, validate Stripe purchase, integration identifiers, paywall get/list/update). All HTTPS REST.
+  - url: https://adapty.io/docs/ss-get-profile
+    type: APIReference
+    note: Confirms base path /api/v2/server-side-api/profile/ with GET method.
+  - url: https://adapty.io/docs/webhook
+    type: Documentation
+    note: Event delivery is outbound HTTP webhooks, not WebSocket or SSE.
+actions:
+  asyncapiPath: null
+  apisYmlUpdated: true
+  reason: |
+    No WebSocket or SSE protocol surface exists. Adapty's only asynchronous
+    surface is outbound HTTP webhooks, which are represented as a REST-adjacent
+    entry (Adapty Webhooks) in apis.yml rather than as an AsyncAPI document. No
+    AsyncAPI file was authored because there is no streaming/bidirectional
+    transport to model.

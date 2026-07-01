@@ -1,0 +1,221 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Adapty Server-Side API",
+    "version": "2.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "Api-Key {{secret_api_key}}",
+      "in": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Profiles",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get profile",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.adapty.io/api/v2/server-side-api/profile/"
+          },
+          "docs": "Retrieve the end-user's profile with access levels, subscriptions, and non-subscriptions. Identify the profile via the adapty-profile-id or adapty-customer-user-id header."
+        },
+        {
+          "info": {
+            "name": "Create profile",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.adapty.io/api/v2/server-side-api/profile/",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new end-user profile."
+        },
+        {
+          "info": {
+            "name": "Update profile",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.adapty.io/api/v2/server-side-api/profile/",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update attributes on an existing end-user profile."
+        },
+        {
+          "info": {
+            "name": "Delete profile",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.adapty.io/api/v2/server-side-api/profile/"
+          },
+          "docs": "Delete an end-user profile and its associated data."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Purchases",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Set transaction",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.adapty.io/api/v2/server-side-api/purchase/set-transaction/",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Record a transaction for a profile and grant the corresponding access level."
+        },
+        {
+          "info": {
+            "name": "Validate Stripe purchase",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.adapty.io/api/v2/server-side-api/purchase/stripe/",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Validate a Stripe purchase, grant access level, and import the customer's transaction history."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Access Levels",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Grant access level",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.adapty.io/api/v2/server-side-api/purchase/profile/grant-access-level/",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Grant an access level to an end user without providing a transaction."
+        },
+        {
+          "info": {
+            "name": "Revoke access level",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.adapty.io/api/v2/server-side-api/purchase/profile/revoke-access-level/",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Revoke a previously granted access level from an end user."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Integrations",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Add integration identifiers",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.adapty.io/api/v2/server-side-api/profile/integration-identifiers/",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Attach third-party integration identifiers (AppsFlyer, Amplitude, Adjust, etc.) to an Adapty profile."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Paywalls",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List paywalls",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.adapty.io/api/v2/server-side-api/paywalls/"
+          },
+          "docs": "List all paywalls configured for the app."
+        },
+        {
+          "info": {
+            "name": "Get paywall",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.adapty.io/api/v2/server-side-api/paywalls/{{developer_id}}/"
+          },
+          "docs": "Fetch a single paywall by its developer (placement) identifier."
+        },
+        {
+          "info": {
+            "name": "Update paywall",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.adapty.io/api/v2/server-side-api/paywalls/{{developer_id}}/",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update the configuration of an existing paywall."
+        }
+      ]
+    }
+  ]
+}

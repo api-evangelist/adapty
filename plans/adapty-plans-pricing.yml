@@ -1,0 +1,139 @@
+specification: API Commons Plans
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
+provider: Adapty
+providerId: adapty
+created: '2026-07-01'
+modified: '2026-07-01'
+reconciled: true
+tags:
+- Mobile
+- Subscriptions
+- In-App Purchases
+- Paywalls
+- Analytics
+- Plans
+description: >-
+  Adapty pricing is revenue-based, keyed to Monthly Tracked Revenue (MTR) - the
+  volume of subscription revenue flowing through apps using the platform. As of
+  the 2026 pricing update Adapty offers two plans: Pro and Enterprise. Pro is
+  free (full platform access, including the SDK, paywalls, A/B testing, remote
+  config, analytics, and the Server-Side API) while MTR stays under a $5,000 per
+  month threshold; above that it is billed as roughly 1% of tracked revenue, with
+  optional add-ons (Refund Saver, Adapty UA, Apple Ads Manager) priced
+  individually. Enterprise is custom-priced with priority support and tailored
+  terms.
+notes: >-
+  Revenue thresholds and percentages reflect Adapty's 2026 pricing announcement;
+  verify current figures on the Adapty pricing page during reconciliation. All
+  API surfaces (SDK and Server-Side API) are included in the plan - APIs are not
+  metered separately from tracked revenue.
+sources:
+- https://adapty.io/pricing/
+- https://adapty.io/blog/adapty-new-pricing-2026/
+- https://adapty.io/docs
+plans:
+- id: adapty-pro
+  name: Pro
+  type: usage
+  description: >-
+    Full access to every platform feature - SDK, paywalls, A/B testing, remote
+    config, subscription analytics, and the Server-Side REST API - free while
+    Monthly Tracked Revenue is under the $5,000/month threshold, then billed as a
+    percentage of tracked revenue.
+  entries:
+  - label: Under $5K MTR
+    name: pro_free_tier
+    type: usage
+    metric: monthly_tracked_revenue
+    limit: 5000
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: free while MTR under $5,000/month
+    userMultiplied: false
+  - label: Above $5K MTR
+    name: pro_revenue_share
+    type: usage
+    metric: monthly_tracked_revenue
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: ~1% of monthly tracked revenue
+    userMultiplied: false
+  elements:
+  - name: Mobile SDK (iOS, Android, Flutter, React Native, Unity)
+  - name: Paywalls & Paywall Builder
+  - name: A/B Testing
+  - name: Remote Config
+  - name: Subscription Analytics
+  - name: Server-Side API
+  - name: Webhooks & Integrations
+  - name: Server-Side Receipt Validation
+- id: adapty-addons
+  name: Add-ons
+  type: usage
+  description: >-
+    Optional Pro add-ons priced individually; free to use while MTR stays under
+    the $5,000/month threshold.
+  entries:
+  - label: Refund Saver
+    name: addon_refund_saver
+    type: usage
+    metric: contract
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: individually priced (free under $5K MTR)
+    userMultiplied: false
+  - label: Adapty UA
+    name: addon_adapty_ua
+    type: usage
+    metric: contract
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: individually priced (free under $5K MTR)
+    userMultiplied: false
+  - label: Apple Ads Manager
+    name: addon_apple_ads_manager
+    type: usage
+    metric: contract
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: individually priced (free under $5K MTR)
+    userMultiplied: false
+  elements:
+  - name: Refund Saver
+  - name: Adapty UA
+  - name: Apple Ads Manager
+- id: adapty-enterprise
+  name: Enterprise
+  type: enterprise
+  description: >-
+    For large publishers: priority support, custom pricing, and tailored
+    solutions. Contact Adapty sales.
+  entries:
+  - label: Enterprise Agreement
+    name: enterprise
+    type: flat
+    metric: contract
+    limit: -1
+    timeFrame: year
+    geo: global
+    unit: 1
+    price: contact sales
+    userMultiplied: false
+  elements:
+  - name: Custom Pricing
+  - name: Priority Support
+  - name: Tailored Solutions
+  - name: SLA
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

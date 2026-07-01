@@ -1,0 +1,272 @@
+{
+  "info": {
+    "name": "Adapty Server-Side API",
+    "description": "Adapty Server-Side REST API (v2). Authenticate with a secret API key via the Authorization: Api-Key <secret_key> header, and address a profile with the adapty-profile-id or adapty-customer-user-id header.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      { "key": "key", "value": "Authorization" },
+      { "key": "value", "value": "Api-Key {{secret_api_key}}" },
+      { "key": "in", "value": "header" }
+    ]
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "https://api.adapty.io/api/v2/server-side-api" },
+    { "key": "secret_api_key", "value": "secret_live_xxxxxxxx" },
+    { "key": "profile_id", "value": "" },
+    { "key": "customer_user_id", "value": "" },
+    { "key": "developer_id", "value": "" }
+  ],
+  "item": [
+    {
+      "name": "Profiles",
+      "item": [
+        {
+          "name": "Get profile",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "adapty-profile-id", "value": "{{profile_id}}" },
+              { "key": "adapty-customer-user-id", "value": "{{customer_user_id}}" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/profile/",
+              "host": ["{{baseUrl}}"],
+              "path": ["profile", ""]
+            },
+            "description": "Retrieve the end-user's profile with access levels, subscriptions, and non-subscriptions."
+          }
+        },
+        {
+          "name": "Create profile",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"customer_user_id\": \"user_42\",\n  \"email\": \"user@example.com\",\n  \"custom_attributes\": {}\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/profile/",
+              "host": ["{{baseUrl}}"],
+              "path": ["profile", ""]
+            },
+            "description": "Create a new end-user profile."
+          }
+        },
+        {
+          "name": "Update profile",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "adapty-profile-id", "value": "{{profile_id}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"new@example.com\",\n  \"custom_attributes\": {}\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/profile/",
+              "host": ["{{baseUrl}}"],
+              "path": ["profile", ""]
+            },
+            "description": "Update attributes on an existing end-user profile."
+          }
+        },
+        {
+          "name": "Delete profile",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              { "key": "adapty-profile-id", "value": "{{profile_id}}" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/profile/",
+              "host": ["{{baseUrl}}"],
+              "path": ["profile", ""]
+            },
+            "description": "Delete an end-user profile and its associated data."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Purchases",
+      "item": [
+        {
+          "name": "Set transaction",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "adapty-profile-id", "value": "{{profile_id}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"store\": \"app_store\",\n  \"transaction_id\": \"1000000123456789\",\n  \"vendor_product_id\": \"premium_monthly\",\n  \"price\": 9.99,\n  \"currency\": \"USD\"\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/purchase/set-transaction/",
+              "host": ["{{baseUrl}}"],
+              "path": ["purchase", "set-transaction", ""]
+            },
+            "description": "Record a transaction for a profile and grant the corresponding access level."
+          }
+        },
+        {
+          "name": "Validate Stripe purchase",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "adapty-profile-id", "value": "{{profile_id}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"stripe_customer_id\": \"cus_xxx\",\n  \"stripe_subscription_id\": \"sub_xxx\"\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/purchase/stripe/",
+              "host": ["{{baseUrl}}"],
+              "path": ["purchase", "stripe", ""]
+            },
+            "description": "Validate a Stripe purchase, grant access level, and import the customer's transaction history."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Access Levels",
+      "item": [
+        {
+          "name": "Grant access level",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "adapty-profile-id", "value": "{{profile_id}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"access_level_id\": \"premium\",\n  \"expires_at\": \"2027-01-01T00:00:00Z\"\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/purchase/profile/grant-access-level/",
+              "host": ["{{baseUrl}}"],
+              "path": ["purchase", "profile", "grant-access-level", ""]
+            },
+            "description": "Grant an access level to an end user without providing a transaction."
+          }
+        },
+        {
+          "name": "Revoke access level",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "adapty-profile-id", "value": "{{profile_id}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"access_level_id\": \"premium\"\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/purchase/profile/revoke-access-level/",
+              "host": ["{{baseUrl}}"],
+              "path": ["purchase", "profile", "revoke-access-level", ""]
+            },
+            "description": "Revoke a previously granted access level from an end user."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Integrations",
+      "item": [
+        {
+          "name": "Add integration identifiers",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "adapty-profile-id", "value": "{{profile_id}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"integration_identifiers\": {\n    \"appsflyer_id\": \"1234567890-1234567\",\n    \"amplitude_user_id\": \"user_42\"\n  }\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/profile/integration-identifiers/",
+              "host": ["{{baseUrl}}"],
+              "path": ["profile", "integration-identifiers", ""]
+            },
+            "description": "Attach third-party integration identifiers to an Adapty profile."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Paywalls",
+      "item": [
+        {
+          "name": "List paywalls",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/paywalls/",
+              "host": ["{{baseUrl}}"],
+              "path": ["paywalls", ""]
+            },
+            "description": "List all paywalls configured for the app."
+          }
+        },
+        {
+          "name": "Get paywall",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/paywalls/{{developer_id}}/",
+              "host": ["{{baseUrl}}"],
+              "path": ["paywalls", "{{developer_id}}", ""]
+            },
+            "description": "Fetch a single paywall by its developer (placement) identifier."
+          }
+        },
+        {
+          "name": "Update paywall",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"paywall_name\": \"Main Paywall\",\n  \"remote_config\": { \"lang\": \"en\", \"data\": {} }\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/paywalls/{{developer_id}}/",
+              "host": ["{{baseUrl}}"],
+              "path": ["paywalls", "{{developer_id}}", ""]
+            },
+            "description": "Update the configuration of an existing paywall."
+          }
+        }
+      ]
+    }
+  ]
+}

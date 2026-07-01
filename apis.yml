@@ -1,0 +1,172 @@
+aid: adapty
+url: https://raw.githubusercontent.com/api-evangelist/adapty/refs/heads/main/apis.yml
+name: Adapty
+kind: company
+description: Adapty is a mobile in-app subscription platform for iOS, Android, Flutter,
+  React Native, and Unity apps. Its core is a client SDK for paywalls, A/B testing,
+  remote config, and server-side receipt validation, backed by a supporting Server-Side
+  REST API for programmatically managing profiles, purchases and transactions,
+  access levels (entitlements), and paywalls, plus webhooks and integrations for
+  streaming subscription events to downstream analytics and marketing tools.
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+tags:
+- Mobile
+- Subscriptions
+- In-App Purchases
+- Paywalls
+- Analytics
+created: '2026-07-01'
+modified: '2026-07-01'
+specificationVersion: '0.19'
+apis:
+- aid: adapty:adapty-server-side-profiles-api
+  name: Adapty Server-Side Profiles API
+  tags:
+  - Profiles
+  - Customers
+  - Server-Side
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://adapty.io/docs/getting-started-with-server-side-api
+  baseURL: https://api.adapty.io/api/v2/server-side-api
+  properties:
+  - url: https://adapty.io/docs/getting-started-with-server-side-api
+    type: Documentation
+  - url: https://adapty.io/docs/server-side-api-specs
+    type: APIReference
+  - url: openapi/adapty-openapi.yml
+    type: OpenAPI
+  - url: collections/adapty.postman_collection.json
+    type: PostmanCollection
+  - url: collections/adapty.opencollection.json
+    type: OpenCollection
+  description: Programmatically get, create, update, and delete end-user profiles,
+    addressing customers by Adapty profile ID or your own customer user ID and
+    reading their access levels, subscriptions, and non-subscriptions.
+- aid: adapty:adapty-server-side-purchases-transactions-api
+  name: Adapty Server-Side Purchases & Transactions API
+  tags:
+  - Purchases
+  - Transactions
+  - Receipt Validation
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://adapty.io/docs/server-side-api-specs
+  baseURL: https://api.adapty.io/api/v2/server-side-api
+  properties:
+  - url: https://adapty.io/docs/server-side-api-specs
+    type: Documentation
+  - url: https://adapty.io/docs/server-side-api-objects
+    type: APIReference
+  - url: openapi/adapty-openapi.yml
+    type: OpenAPI
+  - url: collections/adapty.postman_collection.json
+    type: PostmanCollection
+  - url: collections/adapty.opencollection.json
+    type: OpenCollection
+  description: Record transactions against a profile and validate Stripe purchases,
+    granting the resulting access level and importing the customer's transaction
+    history into Adapty for server-side (Stripe, web, and store) billing flows.
+- aid: adapty:adapty-server-side-access-levels-api
+  name: Adapty Server-Side Access Levels API
+  tags:
+  - Access Levels
+  - Entitlements
+  - Server-Side
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://adapty.io/docs/access-level
+  baseURL: https://api.adapty.io/api/v2/server-side-api
+  properties:
+  - url: https://adapty.io/docs/access-level
+    type: Documentation
+  - url: https://adapty.io/docs/server-side-api-specs
+    type: APIReference
+  - url: openapi/adapty-openapi.yml
+    type: OpenAPI
+  - url: collections/adapty.postman_collection.json
+    type: PostmanCollection
+  - url: collections/adapty.opencollection.json
+    type: OpenCollection
+  description: Grant and revoke access levels (entitlements) for a profile directly,
+    without requiring a transaction, to unlock or remove paid features for
+    promotions, support flows, and cross-platform entitlement syncing.
+- aid: adapty:adapty-server-side-paywalls-products-api
+  name: Adapty Server-Side Paywalls & Products API
+  tags:
+  - Paywalls
+  - Products
+  - Remote Config
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://adapty.io/docs/paywalls
+  baseURL: https://api.adapty.io/api/v2/server-side-api
+  properties:
+  - url: https://adapty.io/docs/paywalls
+    type: Documentation
+  - url: https://adapty.io/docs/server-side-api-specs
+    type: APIReference
+  - url: openapi/adapty-openapi.yml
+    type: OpenAPI
+  - url: collections/adapty.postman_collection.json
+    type: PostmanCollection
+  - url: collections/adapty.opencollection.json
+    type: OpenCollection
+  description: Fetch a single paywall, list paywalls, and update paywall configuration
+    server-side, retrieving the products and remote-config payload a client would
+    otherwise resolve through the SDK.
+- aid: adapty:adapty-server-side-integrations-api
+  name: Adapty Server-Side Integrations API
+  tags:
+  - Integrations
+  - Identifiers
+  - Attribution
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://adapty.io/docs/getting-started-with-server-side-api
+  baseURL: https://api.adapty.io/api/v2/server-side-api
+  properties:
+  - url: https://adapty.io/docs/getting-started-with-server-side-api
+    type: Documentation
+  - url: https://adapty.io/docs/server-side-api-specs
+    type: APIReference
+  - url: openapi/adapty-openapi.yml
+    type: OpenAPI
+  - url: collections/adapty.postman_collection.json
+    type: PostmanCollection
+  - url: collections/adapty.opencollection.json
+    type: OpenCollection
+  description: Attach third-party integration identifiers (analytics, attribution,
+    and marketing tool IDs such as AppsFlyer, Amplitude, and Adjust) to an Adapty
+    profile so subscription events can be reconciled across the customer's stack.
+- aid: adapty:adapty-webhooks
+  name: Adapty Webhooks
+  tags:
+  - Webhooks
+  - Events
+  - Subscription Lifecycle
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://adapty.io/docs/webhook
+  baseURL: https://api.adapty.io/api/v2/server-side-api
+  properties:
+  - url: https://adapty.io/docs/webhook
+    type: Documentation
+  - url: https://adapty.io/docs/events
+    type: APIReference
+  description: Outbound webhooks that POST subscription lifecycle events (trial
+    start, subscription started, renewed, billing issue, refund, access-level
+    granted/revoked) to your endpoint in near real time for downstream analytics
+    and messaging.
+common:
+- type: GitHubOrganization
+  url: https://github.com/adaptyteam
+- type: LinkedIn
+  url: https://www.linkedin.com/company/adapty-io
+- type: Website
+  url: https://adapty.io/
+- type: Documentation
+  url: https://adapty.io/docs
+- type: Plans
+  url: plans/adapty-plans-pricing.yml
+- type: RateLimits
+  url: rate-limits/adapty-rate-limits.yml
+- type: FinOps
+  url: finops/adapty-finops.yml
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

@@ -1,0 +1,88 @@
+specification: FinOps Framework
+specificationVersion: '1.0'
+schema: https://www.finops.org/framework/
+provider: Adapty
+providerId: adapty
+created: '2026-07-01'
+modified: '2026-07-01'
+reconciled: true
+tags:
+- Mobile
+- Subscriptions
+- In-App Purchases
+- Analytics
+- FinOps
+- Cost Management
+- FOCUS
+description: >-
+  FinOps view of Adapty spend. Adapty bills on Monthly Tracked Revenue (MTR)
+  rather than per-API-call: the platform (SDK, paywalls, A/B testing, remote
+  config, analytics, and the Server-Side API) is free while MTR is under the
+  $5,000/month threshold and billed at roughly 1% of tracked revenue above it,
+  with optional add-ons priced individually and Enterprise custom-priced.
+  Because cost scales with the revenue the platform tracks rather than with API
+  volume, FinOps attention focuses on which apps/products drive tracked revenue
+  and on add-on selection rather than on request metering.
+notes: >-
+  Percentage and threshold reflect Adapty's 2026 pricing; verify current figures
+  on the Adapty pricing page during reconciliation. API usage (SDK and
+  Server-Side API) is not a separate billable meter.
+sources:
+- https://adapty.io/pricing/
+- https://adapty.io/blog/adapty-new-pricing-2026/
+- https://adapty.io/docs
+- https://focus.finops.org/focus-specification/v1-3/
+alignedWith:
+  framework: FinOps Foundation Framework
+  frameworkUrl: https://www.finops.org/framework/
+  dataSpec: FOCUS
+  dataSpecVersion: '1.3'
+  dataSpecUrl: https://focus.finops.org/focus-specification/v1-3/
+publisherName: Adapty
+serviceCategory: Analytics and Monetization
+billingModel:
+  pricingCategory: Usage-Based
+  billingFrequency: Monthly
+  billingCurrency: USD
+  chargeCategories:
+  - Usage
+  - Purchase
+meters:
+- name: monthly_tracked_revenue
+  description: Subscription revenue flowing through apps on the platform, billed as a percentage of MTR above the free threshold.
+  unit: usd
+  aggregation: sum
+  dimensions:
+  - account
+  - app
+  - product
+- name: addon_refund_saver
+  description: Refund Saver add-on charge (free while under the MTR threshold).
+  unit: contract
+  aggregation: max
+  dimensions:
+  - account
+- name: addon_adapty_ua
+  description: Adapty UA add-on charge (free while under the MTR threshold).
+  unit: contract
+  aggregation: max
+  dimensions:
+  - account
+- name: addon_apple_ads_manager
+  description: Apple Ads Manager add-on charge (free while under the MTR threshold).
+  unit: contract
+  aggregation: max
+  dimensions:
+  - account
+principles:
+- name: Visibility
+  description: Track MTR per app and product in Adapty analytics; understand which surfaces push you over the free threshold.
+- name: Allocation
+  description: Attribute tracked revenue to apps, products, and paywalls to map platform cost to the products that generate it.
+- name: Optimization
+  description: Enable only the add-ons you need; consolidate low-revenue apps; use the free tier fully while under the MTR threshold.
+- name: Accountability
+  description: Assign product owners responsibility for the revenue their apps track and the platform percentage that follows.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

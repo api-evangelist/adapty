@@ -1,0 +1,62 @@
+specification: API Commons Rate Limits
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/RateLimits
+provider: Adapty
+providerId: adapty
+created: '2026-07-01'
+modified: '2026-07-01'
+reconciled: false
+tags:
+- Mobile
+- Subscriptions
+- Server-Side
+- Rate Limiting
+- Quotas
+- Throttling
+description: >-
+  Adapty applies per-account rate limiting to its Server-Side REST API to protect
+  platform stability. Adapty documents that server-side requests should be kept
+  to reasonable volumes and recommends batching and caching where possible;
+  exceeding limits returns HTTP 429. Specific numeric per-endpoint request-per-
+  second/minute limits are not published in a reconciled table and vary by
+  account and endpoint (profile reads vs. transaction writes). This artifact is
+  not reconciled to exact values.
+notes: >-
+  Confirm current per-endpoint limits and any documented burst allowances with
+  Adapty support or the Server-Side API reference during reconciliation. Prefer
+  the SDK for high-volume client-side reads; use the Server-Side API for backend
+  sync and administrative operations.
+sources:
+- https://adapty.io/docs/getting-started-with-server-side-api
+- https://adapty.io/docs/server-side-api-specs
+responseCodes:
+  throttled: 429
+limits:
+- name: Server-Side API Requests
+  scope: account
+  metric: requests
+  limit: see provider documentation
+  notes: Per-account request rate on the Server-Side REST API; varies by endpoint.
+- name: Profile Reads
+  scope: account
+  metric: requests
+  limit: see provider documentation
+  notes: GET /profile/ reads; cache profile state where possible to avoid throttling.
+- name: Transaction / Access-Level Writes
+  scope: account
+  metric: requests
+  limit: see provider documentation
+  notes: set-transaction, grant/revoke access level, and Stripe validation writes.
+- name: Webhook Delivery
+  scope: account
+  metric: events
+  limit: n/a (outbound)
+  notes: Adapty delivers events to your endpoint; you must respond promptly (2xx) or Adapty retries with backoff.
+policies:
+- name: Backoff Strategy
+  description: Clients should implement exponential backoff with jitter on 429 responses and honor any Retry-After header.
+- name: Batching & Caching
+  description: Batch server-side operations and cache profile/access-level state to stay within limits; rely on the SDK for client-facing reads.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com
