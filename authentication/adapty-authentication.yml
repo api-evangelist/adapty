@@ -1,0 +1,17 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/adapty-openapi.yml
+summary:
+  types:
+  - apiKey
+  api_key_in:
+  - header
+schemes:
+- name: ApiKeyAuth
+  type: apiKey
+  in: header
+  parameter: Authorization
+  description: 'Secret API key passed as `Authorization: Api-Key <secret_live_...>`. Find your
+    secret key in the Adapty dashboard under App Settings > API keys.'
+  sources:
+  - openapi/adapty-openapi.yml

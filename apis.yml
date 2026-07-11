@@ -153,6 +153,10 @@ apis:
     granted/revoked) to your endpoint in near real time for downstream analytics
     and messaging.
 common:
+- type: DomainSecurity
+  url: security/adapty-domain-security.yml
+- type: Authentication
+  url: authentication/adapty-authentication.yml
 - type: GitHubOrganization
   url: https://github.com/adaptyteam
 - type: LinkedIn
@@ -167,6 +171,8 @@ common:
   url: rate-limits/adapty-rate-limits.yml
 - type: FinOps
   url: finops/adapty-finops.yml
+- type: Blog
+  url: https://adapty.io/blog
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
