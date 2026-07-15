@@ -153,6 +153,8 @@ apis:
     granted/revoked) to your endpoint in near real time for downstream analytics
     and messaging.
 common:
+- type: AgenticAccess
+  url: agentic-access/adapty-agentic-access.yml
 - type: DomainSecurity
   url: security/adapty-domain-security.yml
 - type: Authentication
