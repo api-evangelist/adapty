@@ -1,0 +1,73 @@
+openapi: 3.0.3
+info:
+  title: Adapty Server-Side Access Levels Integrations API
+  description: 'Representative OpenAPI description of the Adapty Server-Side REST API (v2). Adapty''s core product is a mobile client SDK for paywalls, A/B testing, remote config, and receipt validation; this Server-Side API is the supporting REST surface for programmatically managing profiles, purchases and transactions, access levels (entitlements), and paywalls. Authenticate with a secret API key using the `Authorization: Api-Key <secret_key>` header, and address a profile with either the `adapty-profile-id` or `adapty-customer-user-id` request header. Endpoint paths are faithful to Adapty''s published Server-Side API v2 reference; request/response bodies are representative.'
+  termsOfService: https://adapty.io/terms/
+  contact:
+    name: Adapty Support
+    url: https://adapty.io/contacts/
+    email: support@adapty.io
+  version: '2.0'
+servers:
+- url: https://api.adapty.io/api/v2/server-side-api
+  description: Adapty Server-Side API v2
+security:
+- ApiKeyAuth: []
+tags:
+- name: Integrations
+  description: Attach third-party integration identifiers to a profile.
+paths:
+  /profile/integration-identifiers/:
+    post:
+      operationId: setIntegrationIdentifiers
+      tags:
+      - Integrations
+      summary: Add integration identifiers
+      description: Attach third-party integration identifiers (e.g. AppsFlyer, Amplitude, Adjust, OneSignal) to an Adapty profile so subscription events can be reconciled across the customer's analytics and attribution stack.
+      parameters:
+      - $ref: '#/components/parameters/ProfileIdHeader'
+      - $ref: '#/components/parameters/CustomerUserIdHeader'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IntegrationIdentifiersRequest'
+      responses:
+        '200':
+          description: OK
+components:
+  schemas:
+    IntegrationIdentifiersRequest:
+      type: object
+      properties:
+        integration_identifiers:
+          type: object
+          additionalProperties:
+            type: string
+          example:
+            appsflyer_id: 1234567890-1234567
+            amplitude_user_id: user_42
+            one_signal_player_id: 8f2c...
+  parameters:
+    CustomerUserIdHeader:
+      name: adapty-customer-user-id
+      in: header
+      required: false
+      description: The user's ID in your own system.
+      schema:
+        type: string
+    ProfileIdHeader:
+      name: adapty-profile-id
+      in: header
+      required: false
+      description: The user's Adapty profile ID.
+      schema:
+        type: string
+        format: uuid
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: 'Secret API key passed as `Authorization: Api-Key <secret_live_...>`. Find your secret key in the Adapty dashboard under App Settings > API keys.'

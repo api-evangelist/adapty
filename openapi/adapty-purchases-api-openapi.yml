@@ -1,0 +1,221 @@
+openapi: 3.0.3
+info:
+  title: Adapty Server-Side Access Levels Purchases API
+  description: 'Representative OpenAPI description of the Adapty Server-Side REST API (v2). Adapty''s core product is a mobile client SDK for paywalls, A/B testing, remote config, and receipt validation; this Server-Side API is the supporting REST surface for programmatically managing profiles, purchases and transactions, access levels (entitlements), and paywalls. Authenticate with a secret API key using the `Authorization: Api-Key <secret_key>` header, and address a profile with either the `adapty-profile-id` or `adapty-customer-user-id` request header. Endpoint paths are faithful to Adapty''s published Server-Side API v2 reference; request/response bodies are representative.'
+  termsOfService: https://adapty.io/terms/
+  contact:
+    name: Adapty Support
+    url: https://adapty.io/contacts/
+    email: support@adapty.io
+  version: '2.0'
+servers:
+- url: https://api.adapty.io/api/v2/server-side-api
+  description: Adapty Server-Side API v2
+security:
+- ApiKeyAuth: []
+tags:
+- name: Purchases
+  description: Set transactions and validate store/Stripe purchases.
+paths:
+  /purchase/set-transaction/:
+    post:
+      operationId: setTransaction
+      tags:
+      - Purchases
+      summary: Set transaction
+      description: Record a transaction for a profile and grant the corresponding access level. Used to sync purchases originating outside the Adapty SDK.
+      parameters:
+      - $ref: '#/components/parameters/ProfileIdHeader'
+      - $ref: '#/components/parameters/CustomerUserIdHeader'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SetTransactionRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProfileResponse'
+  /purchase/stripe/:
+    post:
+      operationId: validateStripePurchase
+      tags:
+      - Purchases
+      summary: Validate Stripe purchase and import transaction history
+      description: Validate a Stripe purchase, provide the resulting access level to the customer, and import their Stripe transaction history into Adapty.
+      parameters:
+      - $ref: '#/components/parameters/ProfileIdHeader'
+      - $ref: '#/components/parameters/CustomerUserIdHeader'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StripePurchaseRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProfileResponse'
+components:
+  schemas:
+    Subscription:
+      type: object
+      properties:
+        is_active:
+          type: boolean
+        vendor_product_id:
+          type: string
+        store:
+          type: string
+        expires_at:
+          type: string
+          format: date-time
+          nullable: true
+        renewed_at:
+          type: string
+          format: date-time
+          nullable: true
+        is_in_grace_period:
+          type: boolean
+        is_sandbox:
+          type: boolean
+    AccessLevel:
+      type: object
+      properties:
+        id:
+          type: string
+          example: premium
+        is_active:
+          type: boolean
+        is_lifetime:
+          type: boolean
+        expires_at:
+          type: string
+          format: date-time
+          nullable: true
+        activated_at:
+          type: string
+          format: date-time
+        store:
+          type: string
+          example: app_store
+        vendor_product_id:
+          type: string
+        will_renew:
+          type: boolean
+    ProfileResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/Profile'
+    Profile:
+      type: object
+      properties:
+        profile_id:
+          type: string
+          format: uuid
+        customer_user_id:
+          type: string
+          nullable: true
+        segment_hash:
+          type: string
+        access_levels:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/AccessLevel'
+        subscriptions:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/Subscription'
+        non_subscriptions:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              $ref: '#/components/schemas/NonSubscription'
+        custom_attributes:
+          type: object
+          additionalProperties: true
+    StripePurchaseRequest:
+      type: object
+      required:
+      - stripe_customer_id
+      properties:
+        stripe_customer_id:
+          type: string
+        stripe_subscription_id:
+          type: string
+        stripe_payment_intent_id:
+          type: string
+    NonSubscription:
+      type: object
+      properties:
+        purchase_id:
+          type: string
+        vendor_product_id:
+          type: string
+        store:
+          type: string
+        purchased_at:
+          type: string
+          format: date-time
+        is_consumable:
+          type: boolean
+        is_refund:
+          type: boolean
+    SetTransactionRequest:
+      type: object
+      required:
+      - store
+      - transaction_id
+      - vendor_product_id
+      properties:
+        store:
+          type: string
+          enum:
+          - app_store
+          - play_store
+          - stripe
+        transaction_id:
+          type: string
+        original_transaction_id:
+          type: string
+        vendor_product_id:
+          type: string
+        price:
+          type: number
+        currency:
+          type: string
+          example: USD
+        purchased_at:
+          type: string
+          format: date-time
+  parameters:
+    ProfileIdHeader:
+      name: adapty-profile-id
+      in: header
+      required: false
+      description: The user's Adapty profile ID.
+      schema:
+        type: string
+        format: uuid
+    CustomerUserIdHeader:
+      name: adapty-customer-user-id
+      in: header
+      required: false
+      description: The user's ID in your own system.
+      schema:
+        type: string
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: 'Secret API key passed as `Authorization: Api-Key <secret_live_...>`. Find your secret key in the Adapty dashboard under App Settings > API keys.'

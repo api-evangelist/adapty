@@ -1,0 +1,208 @@
+openapi: 3.0.3
+info:
+  title: Adapty Server-Side Access Levels API
+  description: 'Representative OpenAPI description of the Adapty Server-Side REST API (v2). Adapty''s core product is a mobile client SDK for paywalls, A/B testing, remote config, and receipt validation; this Server-Side API is the supporting REST surface for programmatically managing profiles, purchases and transactions, access levels (entitlements), and paywalls. Authenticate with a secret API key using the `Authorization: Api-Key <secret_key>` header, and address a profile with either the `adapty-profile-id` or `adapty-customer-user-id` request header. Endpoint paths are faithful to Adapty''s published Server-Side API v2 reference; request/response bodies are representative.'
+  termsOfService: https://adapty.io/terms/
+  contact:
+    name: Adapty Support
+    url: https://adapty.io/contacts/
+    email: support@adapty.io
+  version: '2.0'
+servers:
+- url: https://api.adapty.io/api/v2/server-side-api
+  description: Adapty Server-Side API v2
+security:
+- ApiKeyAuth: []
+tags:
+- name: Access Levels
+  description: Grant and revoke access levels (entitlements) directly.
+paths:
+  /purchase/profile/grant-access-level/:
+    post:
+      operationId: grantAccessLevel
+      tags:
+      - Access Levels
+      summary: Grant access level
+      description: Grant a specific access level to an end user without providing a transaction. Useful for promotions, support grants, and cross-platform entitlement syncing.
+      parameters:
+      - $ref: '#/components/parameters/ProfileIdHeader'
+      - $ref: '#/components/parameters/CustomerUserIdHeader'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GrantAccessLevelRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProfileResponse'
+  /purchase/profile/revoke-access-level/:
+    post:
+      operationId: revokeAccessLevel
+      tags:
+      - Access Levels
+      summary: Revoke access level
+      description: Revoke a previously granted access level from an end user.
+      parameters:
+      - $ref: '#/components/parameters/ProfileIdHeader'
+      - $ref: '#/components/parameters/CustomerUserIdHeader'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RevokeAccessLevelRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProfileResponse'
+components:
+  schemas:
+    Subscription:
+      type: object
+      properties:
+        is_active:
+          type: boolean
+        vendor_product_id:
+          type: string
+        store:
+          type: string
+        expires_at:
+          type: string
+          format: date-time
+          nullable: true
+        renewed_at:
+          type: string
+          format: date-time
+          nullable: true
+        is_in_grace_period:
+          type: boolean
+        is_sandbox:
+          type: boolean
+    GrantAccessLevelRequest:
+      type: object
+      required:
+      - access_level_id
+      properties:
+        access_level_id:
+          type: string
+          example: premium
+        expires_at:
+          type: string
+          format: date-time
+          nullable: true
+        is_lifetime:
+          type: boolean
+        starts_at:
+          type: string
+          format: date-time
+    AccessLevel:
+      type: object
+      properties:
+        id:
+          type: string
+          example: premium
+        is_active:
+          type: boolean
+        is_lifetime:
+          type: boolean
+        expires_at:
+          type: string
+          format: date-time
+          nullable: true
+        activated_at:
+          type: string
+          format: date-time
+        store:
+          type: string
+          example: app_store
+        vendor_product_id:
+          type: string
+        will_renew:
+          type: boolean
+    ProfileResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/Profile'
+    Profile:
+      type: object
+      properties:
+        profile_id:
+          type: string
+          format: uuid
+        customer_user_id:
+          type: string
+          nullable: true
+        segment_hash:
+          type: string
+        access_levels:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/AccessLevel'
+        subscriptions:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/Subscription'
+        non_subscriptions:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              $ref: '#/components/schemas/NonSubscription'
+        custom_attributes:
+          type: object
+          additionalProperties: true
+    RevokeAccessLevelRequest:
+      type: object
+      required:
+      - access_level_id
+      properties:
+        access_level_id:
+          type: string
+          example: premium
+    NonSubscription:
+      type: object
+      properties:
+        purchase_id:
+          type: string
+        vendor_product_id:
+          type: string
+        store:
+          type: string
+        purchased_at:
+          type: string
+          format: date-time
+        is_consumable:
+          type: boolean
+        is_refund:
+          type: boolean
+  parameters:
+    ProfileIdHeader:
+      name: adapty-profile-id
+      in: header
+      required: false
+      description: The user's Adapty profile ID.
+      schema:
+        type: string
+        format: uuid
+    CustomerUserIdHeader:
+      name: adapty-customer-user-id
+      in: header
+      required: false
+      description: The user's ID in your own system.
+      schema:
+        type: string
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: 'Secret API key passed as `Authorization: Api-Key <secret_live_...>`. Find your secret key in the Adapty dashboard under App Settings > API keys.'

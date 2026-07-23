@@ -1,0 +1,129 @@
+openapi: 3.0.3
+info:
+  title: Adapty Server-Side Access Levels Paywalls API
+  description: 'Representative OpenAPI description of the Adapty Server-Side REST API (v2). Adapty''s core product is a mobile client SDK for paywalls, A/B testing, remote config, and receipt validation; this Server-Side API is the supporting REST surface for programmatically managing profiles, purchases and transactions, access levels (entitlements), and paywalls. Authenticate with a secret API key using the `Authorization: Api-Key <secret_key>` header, and address a profile with either the `adapty-profile-id` or `adapty-customer-user-id` request header. Endpoint paths are faithful to Adapty''s published Server-Side API v2 reference; request/response bodies are representative.'
+  termsOfService: https://adapty.io/terms/
+  contact:
+    name: Adapty Support
+    url: https://adapty.io/contacts/
+    email: support@adapty.io
+  version: '2.0'
+servers:
+- url: https://api.adapty.io/api/v2/server-side-api
+  description: Adapty Server-Side API v2
+security:
+- ApiKeyAuth: []
+tags:
+- name: Paywalls
+  description: Read and update paywalls and their products.
+paths:
+  /paywalls/{developer_id}/:
+    get:
+      operationId: getPaywall
+      tags:
+      - Paywalls
+      summary: Get paywall
+      description: Fetch a single paywall by its developer (placement) identifier.
+      parameters:
+      - name: developer_id
+        in: path
+        required: true
+        description: The paywall placement / developer identifier.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Paywall'
+    patch:
+      operationId: updatePaywall
+      tags:
+      - Paywalls
+      summary: Update paywall
+      description: Update the configuration of an existing paywall.
+      parameters:
+      - name: developer_id
+        in: path
+        required: true
+        description: The paywall placement / developer identifier.
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Paywall'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Paywall'
+  /paywalls/:
+    get:
+      operationId: listPaywalls
+      tags:
+      - Paywalls
+      summary: List paywalls
+      description: List all paywalls configured for the app.
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Paywall'
+components:
+  schemas:
+    Paywall:
+      type: object
+      properties:
+        developer_id:
+          type: string
+          description: Placement / developer identifier for the paywall.
+        paywall_name:
+          type: string
+        revision:
+          type: integer
+        ab_test_name:
+          type: string
+        remote_config:
+          type: object
+          properties:
+            lang:
+              type: string
+            data:
+              type: object
+              additionalProperties: true
+        products:
+          type: array
+          items:
+            $ref: '#/components/schemas/Product'
+    Product:
+      type: object
+      properties:
+        vendor_product_id:
+          type: string
+        adapty_product_id:
+          type: string
+        store:
+          type: string
+        base_plan_id:
+          type: string
+          nullable: true
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: 'Secret API key passed as `Authorization: Api-Key <secret_live_...>`. Find your secret key in the Adapty dashboard under App Settings > API keys.'
