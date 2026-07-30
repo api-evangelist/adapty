@@ -8,7 +8,20 @@ description: Adapty is a mobile in-app subscription platform for iOS, Android, F
   REST API for programmatically managing profiles, purchases and transactions,
   access levels (entitlements), and paywalls, plus webhooks and integrations for
   streaming subscription events to downstream analytics and marketing tools.
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: paid
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Paid · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/adapty.png
 tags:
 - Mobile
 - Subscriptions
@@ -19,121 +32,6 @@ created: '2026-07-01'
 modified: '2026-07-01'
 specificationVersion: '0.19'
 apis:
-- aid: adapty:adapty-server-side-profiles-api
-  name: Adapty Server-Side Profiles API
-  tags:
-  - Profiles
-  - Customers
-  - Server-Side
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://adapty.io/docs/getting-started-with-server-side-api
-  baseURL: https://api.adapty.io/api/v2/server-side-api
-  properties:
-  - url: https://adapty.io/docs/getting-started-with-server-side-api
-    type: Documentation
-  - url: https://adapty.io/docs/server-side-api-specs
-    type: APIReference
-  - url: openapi/adapty-openapi.yml
-    type: OpenAPI
-  - url: collections/adapty.postman_collection.json
-    type: PostmanCollection
-  - url: collections/adapty.opencollection.json
-    type: OpenCollection
-  description: Programmatically get, create, update, and delete end-user profiles,
-    addressing customers by Adapty profile ID or your own customer user ID and
-    reading their access levels, subscriptions, and non-subscriptions.
-- aid: adapty:adapty-server-side-purchases-transactions-api
-  name: Adapty Server-Side Purchases & Transactions API
-  tags:
-  - Purchases
-  - Transactions
-  - Receipt Validation
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://adapty.io/docs/server-side-api-specs
-  baseURL: https://api.adapty.io/api/v2/server-side-api
-  properties:
-  - url: https://adapty.io/docs/server-side-api-specs
-    type: Documentation
-  - url: https://adapty.io/docs/server-side-api-objects
-    type: APIReference
-  - url: openapi/adapty-openapi.yml
-    type: OpenAPI
-  - url: collections/adapty.postman_collection.json
-    type: PostmanCollection
-  - url: collections/adapty.opencollection.json
-    type: OpenCollection
-  description: Record transactions against a profile and validate Stripe purchases,
-    granting the resulting access level and importing the customer's transaction
-    history into Adapty for server-side (Stripe, web, and store) billing flows.
-- aid: adapty:adapty-server-side-access-levels-api
-  name: Adapty Server-Side Access Levels API
-  tags:
-  - Access Levels
-  - Entitlements
-  - Server-Side
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://adapty.io/docs/access-level
-  baseURL: https://api.adapty.io/api/v2/server-side-api
-  properties:
-  - url: https://adapty.io/docs/access-level
-    type: Documentation
-  - url: https://adapty.io/docs/server-side-api-specs
-    type: APIReference
-  - url: openapi/adapty-openapi.yml
-    type: OpenAPI
-  - url: collections/adapty.postman_collection.json
-    type: PostmanCollection
-  - url: collections/adapty.opencollection.json
-    type: OpenCollection
-  description: Grant and revoke access levels (entitlements) for a profile directly,
-    without requiring a transaction, to unlock or remove paid features for
-    promotions, support flows, and cross-platform entitlement syncing.
-- aid: adapty:adapty-server-side-paywalls-products-api
-  name: Adapty Server-Side Paywalls & Products API
-  tags:
-  - Paywalls
-  - Products
-  - Remote Config
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://adapty.io/docs/paywalls
-  baseURL: https://api.adapty.io/api/v2/server-side-api
-  properties:
-  - url: https://adapty.io/docs/paywalls
-    type: Documentation
-  - url: https://adapty.io/docs/server-side-api-specs
-    type: APIReference
-  - url: openapi/adapty-openapi.yml
-    type: OpenAPI
-  - url: collections/adapty.postman_collection.json
-    type: PostmanCollection
-  - url: collections/adapty.opencollection.json
-    type: OpenCollection
-  description: Fetch a single paywall, list paywalls, and update paywall configuration
-    server-side, retrieving the products and remote-config payload a client would
-    otherwise resolve through the SDK.
-- aid: adapty:adapty-server-side-integrations-api
-  name: Adapty Server-Side Integrations API
-  tags:
-  - Integrations
-  - Identifiers
-  - Attribution
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://adapty.io/docs/getting-started-with-server-side-api
-  baseURL: https://api.adapty.io/api/v2/server-side-api
-  properties:
-  - url: https://adapty.io/docs/getting-started-with-server-side-api
-    type: Documentation
-  - url: https://adapty.io/docs/server-side-api-specs
-    type: APIReference
-  - url: openapi/adapty-openapi.yml
-    type: OpenAPI
-  - url: collections/adapty.postman_collection.json
-    type: PostmanCollection
-  - url: collections/adapty.opencollection.json
-    type: OpenCollection
-  description: Attach third-party integration identifiers (analytics, attribution,
-    and marketing tool IDs such as AppsFlyer, Amplitude, and Adjust) to an Adapty
-    profile so subscription events can be reconciled across the customer's stack.
 - aid: adapty:adapty-webhooks
   name: Adapty Webhooks
   tags:
@@ -148,10 +46,140 @@ apis:
     type: Documentation
   - url: https://adapty.io/docs/events
     type: APIReference
-  description: Outbound webhooks that POST subscription lifecycle events (trial
-    start, subscription started, renewed, billing issue, refund, access-level
-    granted/revoked) to your endpoint in near real time for downstream analytics
-    and messaging.
+  description: >-
+    Outbound webhooks that POST subscription lifecycle events (trial start, subscription started, renewed,
+    billing issue, refund, access-level granted/revoked) to your endpoint in near real time for downstream
+    analytics and messaging.
+- aid: adapty:adapty-access-levels-api
+  name: Adapty Access Levels API
+  description: Grant and revoke access levels (entitlements) directly.
+  humanURL: https://adapty.io/docs/getting-started-with-server-side-api
+  baseURL: https://api.adapty.io/api/v2/server-side-api
+  tags:
+  - Access Levels
+  properties:
+  - type: OpenAPI
+    url: openapi/adapty-access-levels-api-openapi.yml
+  - type: Documentation
+    url: https://adapty.io/docs/getting-started-with-server-side-api
+  - type: APIReference
+    url: https://adapty.io/docs/server-side-api-specs
+  - type: PostmanCollection
+    url: collections/adapty.postman_collection.json
+  - type: OpenCollection
+    url: collections/adapty.opencollection.json
+  - type: Documentation
+    url: https://adapty.io/docs/server-side-api-specs
+  - type: APIReference
+    url: https://adapty.io/docs/server-side-api-objects
+  - type: Documentation
+    url: https://adapty.io/docs/access-level
+  - type: Documentation
+    url: https://adapty.io/docs/paywalls
+- aid: adapty:adapty-integrations-api
+  name: Adapty Integrations API
+  description: Attach third-party integration identifiers to a profile.
+  humanURL: https://adapty.io/docs/getting-started-with-server-side-api
+  baseURL: https://api.adapty.io/api/v2/server-side-api
+  tags:
+  - Integrations
+  properties:
+  - type: OpenAPI
+    url: openapi/adapty-integrations-api-openapi.yml
+  - type: Documentation
+    url: https://adapty.io/docs/getting-started-with-server-side-api
+  - type: APIReference
+    url: https://adapty.io/docs/server-side-api-specs
+  - type: PostmanCollection
+    url: collections/adapty.postman_collection.json
+  - type: OpenCollection
+    url: collections/adapty.opencollection.json
+  - type: Documentation
+    url: https://adapty.io/docs/server-side-api-specs
+  - type: APIReference
+    url: https://adapty.io/docs/server-side-api-objects
+  - type: Documentation
+    url: https://adapty.io/docs/access-level
+  - type: Documentation
+    url: https://adapty.io/docs/paywalls
+- aid: adapty:adapty-paywalls-api
+  name: Adapty Paywalls API
+  description: Read and update paywalls and their products.
+  humanURL: https://adapty.io/docs/getting-started-with-server-side-api
+  baseURL: https://api.adapty.io/api/v2/server-side-api
+  tags:
+  - Paywalls
+  properties:
+  - type: OpenAPI
+    url: openapi/adapty-paywalls-api-openapi.yml
+  - type: Documentation
+    url: https://adapty.io/docs/getting-started-with-server-side-api
+  - type: APIReference
+    url: https://adapty.io/docs/server-side-api-specs
+  - type: PostmanCollection
+    url: collections/adapty.postman_collection.json
+  - type: OpenCollection
+    url: collections/adapty.opencollection.json
+  - type: Documentation
+    url: https://adapty.io/docs/server-side-api-specs
+  - type: APIReference
+    url: https://adapty.io/docs/server-side-api-objects
+  - type: Documentation
+    url: https://adapty.io/docs/access-level
+  - type: Documentation
+    url: https://adapty.io/docs/paywalls
+- aid: adapty:adapty-profiles-api
+  name: Adapty Profiles API
+  description: Get, create, update, and delete end-user profiles.
+  humanURL: https://adapty.io/docs/getting-started-with-server-side-api
+  baseURL: https://api.adapty.io/api/v2/server-side-api
+  tags:
+  - Profiles
+  properties:
+  - type: OpenAPI
+    url: openapi/adapty-profiles-api-openapi.yml
+  - type: Documentation
+    url: https://adapty.io/docs/getting-started-with-server-side-api
+  - type: APIReference
+    url: https://adapty.io/docs/server-side-api-specs
+  - type: PostmanCollection
+    url: collections/adapty.postman_collection.json
+  - type: OpenCollection
+    url: collections/adapty.opencollection.json
+  - type: Documentation
+    url: https://adapty.io/docs/server-side-api-specs
+  - type: APIReference
+    url: https://adapty.io/docs/server-side-api-objects
+  - type: Documentation
+    url: https://adapty.io/docs/access-level
+  - type: Documentation
+    url: https://adapty.io/docs/paywalls
+- aid: adapty:adapty-purchases-api
+  name: Adapty Purchases API
+  description: Set transactions and validate store/Stripe purchases.
+  humanURL: https://adapty.io/docs/getting-started-with-server-side-api
+  baseURL: https://api.adapty.io/api/v2/server-side-api
+  tags:
+  - Purchases
+  properties:
+  - type: OpenAPI
+    url: openapi/adapty-purchases-api-openapi.yml
+  - type: Documentation
+    url: https://adapty.io/docs/getting-started-with-server-side-api
+  - type: APIReference
+    url: https://adapty.io/docs/server-side-api-specs
+  - type: PostmanCollection
+    url: collections/adapty.postman_collection.json
+  - type: OpenCollection
+    url: collections/adapty.opencollection.json
+  - type: Documentation
+    url: https://adapty.io/docs/server-side-api-specs
+  - type: APIReference
+    url: https://adapty.io/docs/server-side-api-objects
+  - type: Documentation
+    url: https://adapty.io/docs/access-level
+  - type: Documentation
+    url: https://adapty.io/docs/paywalls
 common:
 - type: AgenticAccess
   url: agentic-access/adapty-agentic-access.yml
