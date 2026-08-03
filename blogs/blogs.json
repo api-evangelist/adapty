@@ -5,9 +5,10 @@
       "source": "https://adapty.io/blog",
       "feed_url": "https://adapty.io/blog",
       "title": "Adapty Blog",
-      "saved": 0
+      "saved": 0,
+      "error": "parse_failed"
     }
   ],
-  "fetched": "2026-07-11T11:43:46Z",
+  "fetched": "2026-08-01T15:38:58Z",
   "post_count": 5
 }

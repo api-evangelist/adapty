@@ -1,0 +1,22 @@
+{
+  "provider": "adapty",
+  "sources": [
+    "adapty-access-levels-api-openapi.yml",
+    "adapty-integrations-api-openapi.yml",
+    "adapty-paywalls-api-openapi.yml",
+    "adapty-profiles-api-openapi.yml",
+    "adapty-purchases-api-openapi.yml"
+  ],
+  "outputs": [
+    "adapty-access-levels-api-openapi.yml",
+    "adapty-integrations-api-openapi.yml",
+    "adapty-paywalls-api-openapi.yml",
+    "adapty-profiles-api-openapi.yml",
+    "adapty-purchases-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}

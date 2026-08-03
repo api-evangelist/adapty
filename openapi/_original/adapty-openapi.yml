@@ -1,0 +1,546 @@
+openapi: 3.0.3
+info:
+  title: Adapty Server-Side API
+  description: >-
+    Representative OpenAPI description of the Adapty Server-Side REST API (v2).
+    Adapty's core product is a mobile client SDK for paywalls, A/B testing,
+    remote config, and receipt validation; this Server-Side API is the
+    supporting REST surface for programmatically managing profiles, purchases
+    and transactions, access levels (entitlements), and paywalls. Authenticate
+    with a secret API key using the `Authorization: Api-Key <secret_key>`
+    header, and address a profile with either the `adapty-profile-id` or
+    `adapty-customer-user-id` request header. Endpoint paths are faithful to
+    Adapty's published Server-Side API v2 reference; request/response bodies are
+    representative.
+  termsOfService: https://adapty.io/terms/
+  contact:
+    name: Adapty Support
+    url: https://adapty.io/contacts/
+    email: support@adapty.io
+  version: '2.0'
+servers:
+  - url: https://api.adapty.io/api/v2/server-side-api
+    description: Adapty Server-Side API v2
+security:
+  - ApiKeyAuth: []
+tags:
+  - name: Profiles
+    description: Get, create, update, and delete end-user profiles.
+  - name: Purchases
+    description: Set transactions and validate store/Stripe purchases.
+  - name: Access Levels
+    description: Grant and revoke access levels (entitlements) directly.
+  - name: Paywalls
+    description: Read and update paywalls and their products.
+  - name: Integrations
+    description: Attach third-party integration identifiers to a profile.
+paths:
+  /profile/:
+    get:
+      operationId: getProfile
+      tags:
+        - Profiles
+      summary: Get profile
+      description: >-
+        Retrieve the end-user's profile including access levels, subscriptions,
+        and non-subscriptions. Identify the profile with the
+        `adapty-profile-id` or `adapty-customer-user-id` request header.
+      parameters:
+        - $ref: '#/components/parameters/ProfileIdHeader'
+        - $ref: '#/components/parameters/CustomerUserIdHeader'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProfileResponse'
+    post:
+      operationId: createProfile
+      tags:
+        - Profiles
+      summary: Create profile
+      description: Create a new end-user profile in Adapty.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateProfileRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProfileResponse'
+    patch:
+      operationId: updateProfile
+      tags:
+        - Profiles
+      summary: Update profile
+      description: Update attributes on an existing end-user profile.
+      parameters:
+        - $ref: '#/components/parameters/ProfileIdHeader'
+        - $ref: '#/components/parameters/CustomerUserIdHeader'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateProfileRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProfileResponse'
+    delete:
+      operationId: deleteProfile
+      tags:
+        - Profiles
+      summary: Delete profile
+      description: Delete an end-user profile and its associated data.
+      parameters:
+        - $ref: '#/components/parameters/ProfileIdHeader'
+        - $ref: '#/components/parameters/CustomerUserIdHeader'
+      responses:
+        '204':
+          description: No Content
+  /purchase/set-transaction/:
+    post:
+      operationId: setTransaction
+      tags:
+        - Purchases
+      summary: Set transaction
+      description: >-
+        Record a transaction for a profile and grant the corresponding access
+        level. Used to sync purchases originating outside the Adapty SDK.
+      parameters:
+        - $ref: '#/components/parameters/ProfileIdHeader'
+        - $ref: '#/components/parameters/CustomerUserIdHeader'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SetTransactionRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProfileResponse'
+  /purchase/stripe/:
+    post:
+      operationId: validateStripePurchase
+      tags:
+        - Purchases
+      summary: Validate Stripe purchase and import transaction history
+      description: >-
+        Validate a Stripe purchase, provide the resulting access level to the
+        customer, and import their Stripe transaction history into Adapty.
+      parameters:
+        - $ref: '#/components/parameters/ProfileIdHeader'
+        - $ref: '#/components/parameters/CustomerUserIdHeader'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StripePurchaseRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProfileResponse'
+  /purchase/profile/grant-access-level/:
+    post:
+      operationId: grantAccessLevel
+      tags:
+        - Access Levels
+      summary: Grant access level
+      description: >-
+        Grant a specific access level to an end user without providing a
+        transaction. Useful for promotions, support grants, and cross-platform
+        entitlement syncing.
+      parameters:
+        - $ref: '#/components/parameters/ProfileIdHeader'
+        - $ref: '#/components/parameters/CustomerUserIdHeader'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GrantAccessLevelRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProfileResponse'
+  /purchase/profile/revoke-access-level/:
+    post:
+      operationId: revokeAccessLevel
+      tags:
+        - Access Levels
+      summary: Revoke access level
+      description: Revoke a previously granted access level from an end user.
+      parameters:
+        - $ref: '#/components/parameters/ProfileIdHeader'
+        - $ref: '#/components/parameters/CustomerUserIdHeader'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RevokeAccessLevelRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProfileResponse'
+  /profile/integration-identifiers/:
+    post:
+      operationId: setIntegrationIdentifiers
+      tags:
+        - Integrations
+      summary: Add integration identifiers
+      description: >-
+        Attach third-party integration identifiers (e.g. AppsFlyer, Amplitude,
+        Adjust, OneSignal) to an Adapty profile so subscription events can be
+        reconciled across the customer's analytics and attribution stack.
+      parameters:
+        - $ref: '#/components/parameters/ProfileIdHeader'
+        - $ref: '#/components/parameters/CustomerUserIdHeader'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IntegrationIdentifiersRequest'
+      responses:
+        '200':
+          description: OK
+  /paywalls/{developer_id}/:
+    get:
+      operationId: getPaywall
+      tags:
+        - Paywalls
+      summary: Get paywall
+      description: Fetch a single paywall by its developer (placement) identifier.
+      parameters:
+        - name: developer_id
+          in: path
+          required: true
+          description: The paywall placement / developer identifier.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Paywall'
+    patch:
+      operationId: updatePaywall
+      tags:
+        - Paywalls
+      summary: Update paywall
+      description: Update the configuration of an existing paywall.
+      parameters:
+        - name: developer_id
+          in: path
+          required: true
+          description: The paywall placement / developer identifier.
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Paywall'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Paywall'
+  /paywalls/:
+    get:
+      operationId: listPaywalls
+      tags:
+        - Paywalls
+      summary: List paywalls
+      description: List all paywalls configured for the app.
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Paywall'
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: >-
+        Secret API key passed as `Authorization: Api-Key <secret_live_...>`.
+        Find your secret key in the Adapty dashboard under App Settings > API keys.
+  parameters:
+    ProfileIdHeader:
+      name: adapty-profile-id
+      in: header
+      required: false
+      description: The user's Adapty profile ID.
+      schema:
+        type: string
+        format: uuid
+    CustomerUserIdHeader:
+      name: adapty-customer-user-id
+      in: header
+      required: false
+      description: The user's ID in your own system.
+      schema:
+        type: string
+  schemas:
+    ProfileResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/Profile'
+    Profile:
+      type: object
+      properties:
+        profile_id:
+          type: string
+          format: uuid
+        customer_user_id:
+          type: string
+          nullable: true
+        segment_hash:
+          type: string
+        access_levels:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/AccessLevel'
+        subscriptions:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/Subscription'
+        non_subscriptions:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              $ref: '#/components/schemas/NonSubscription'
+        custom_attributes:
+          type: object
+          additionalProperties: true
+    AccessLevel:
+      type: object
+      properties:
+        id:
+          type: string
+          example: premium
+        is_active:
+          type: boolean
+        is_lifetime:
+          type: boolean
+        expires_at:
+          type: string
+          format: date-time
+          nullable: true
+        activated_at:
+          type: string
+          format: date-time
+        store:
+          type: string
+          example: app_store
+        vendor_product_id:
+          type: string
+        will_renew:
+          type: boolean
+    Subscription:
+      type: object
+      properties:
+        is_active:
+          type: boolean
+        vendor_product_id:
+          type: string
+        store:
+          type: string
+        expires_at:
+          type: string
+          format: date-time
+          nullable: true
+        renewed_at:
+          type: string
+          format: date-time
+          nullable: true
+        is_in_grace_period:
+          type: boolean
+        is_sandbox:
+          type: boolean
+    NonSubscription:
+      type: object
+      properties:
+        purchase_id:
+          type: string
+        vendor_product_id:
+          type: string
+        store:
+          type: string
+        purchased_at:
+          type: string
+          format: date-time
+        is_consumable:
+          type: boolean
+        is_refund:
+          type: boolean
+    CreateProfileRequest:
+      type: object
+      properties:
+        customer_user_id:
+          type: string
+        email:
+          type: string
+          format: email
+        custom_attributes:
+          type: object
+          additionalProperties: true
+    UpdateProfileRequest:
+      type: object
+      properties:
+        email:
+          type: string
+          format: email
+        phone_number:
+          type: string
+        custom_attributes:
+          type: object
+          additionalProperties: true
+    SetTransactionRequest:
+      type: object
+      required:
+        - store
+        - transaction_id
+        - vendor_product_id
+      properties:
+        store:
+          type: string
+          enum: [app_store, play_store, stripe]
+        transaction_id:
+          type: string
+        original_transaction_id:
+          type: string
+        vendor_product_id:
+          type: string
+        price:
+          type: number
+        currency:
+          type: string
+          example: USD
+        purchased_at:
+          type: string
+          format: date-time
+    StripePurchaseRequest:
+      type: object
+      required:
+        - stripe_customer_id
+      properties:
+        stripe_customer_id:
+          type: string
+        stripe_subscription_id:
+          type: string
+        stripe_payment_intent_id:
+          type: string
+    GrantAccessLevelRequest:
+      type: object
+      required:
+        - access_level_id
+      properties:
+        access_level_id:
+          type: string
+          example: premium
+        expires_at:
+          type: string
+          format: date-time
+          nullable: true
+        is_lifetime:
+          type: boolean
+        starts_at:
+          type: string
+          format: date-time
+    RevokeAccessLevelRequest:
+      type: object
+      required:
+        - access_level_id
+      properties:
+        access_level_id:
+          type: string
+          example: premium
+    IntegrationIdentifiersRequest:
+      type: object
+      properties:
+        integration_identifiers:
+          type: object
+          additionalProperties:
+            type: string
+          example:
+            appsflyer_id: '1234567890-1234567'
+            amplitude_user_id: user_42
+            one_signal_player_id: 8f2c...
+    Paywall:
+      type: object
+      properties:
+        developer_id:
+          type: string
+          description: Placement / developer identifier for the paywall.
+        paywall_name:
+          type: string
+        revision:
+          type: integer
+        ab_test_name:
+          type: string
+        remote_config:
+          type: object
+          properties:
+            lang:
+              type: string
+            data:
+              type: object
+              additionalProperties: true
+        products:
+          type: array
+          items:
+            $ref: '#/components/schemas/Product'
+    Product:
+      type: object
+      properties:
+        vendor_product_id:
+          type: string
+        adapty_product_id:
+          type: string
+        store:
+          type: string
+        base_plan_id:
+          type: string
+          nullable: true
