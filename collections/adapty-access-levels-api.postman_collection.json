@@ -1,0 +1,307 @@
+{
+  "item": [
+    {
+      "id": "d71d7e84-44e8-4c7b-b575-b278285f2f8e",
+      "name": "Access Levels",
+      "description": {
+        "content": "Grant and revoke access levels (entitlements) directly.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "608f78f9-039a-4a86-912b-a9b9303bf8b5",
+          "name": "Grant access level",
+          "request": {
+            "name": "Grant access level",
+            "description": {
+              "content": "Grant a specific access level to an end user without providing a transaction. Useful for promotions, support grants, and cross-platform entitlement syncing.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "purchase",
+                "profile",
+                "grant-access-level",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "The user's Adapty profile ID.",
+                "key": "adapty-profile-id",
+                "value": "<uuid>"
+              },
+              {
+                "disabled": false,
+                "description": "The user's ID in your own system.",
+                "key": "adapty-customer-user-id",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"access_level_id\": \"<string>\",\n  \"expires_at\": \"<dateTime>\",\n  \"is_lifetime\": \"<boolean>\",\n  \"starts_at\": \"<dateTime>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "2fb30992-2550-4f07-bee3-dc5aaf6862be",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "purchase",
+                    "profile",
+                    "grant-access-level",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The user's Adapty profile ID.",
+                    "key": "adapty-profile-id",
+                    "value": "<uuid>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The user's ID in your own system.",
+                    "key": "adapty-customer-user-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"access_level_id\": \"premium\",\n  \"expires_at\": \"<dateTime>\",\n  \"is_lifetime\": \"<boolean>\",\n  \"starts_at\": \"<dateTime>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"profile_id\": \"2cd3f9bf-3e05-1b38-f9c6-feec0e58b9ab\",\n    \"customer_user_id\": \"string\",\n    \"segment_hash\": \"string\",\n    \"access_levels\": {\n      \"key_0\": {\n        \"id\": \"premium\",\n        \"is_active\": true,\n        \"is_lifetime\": false,\n        \"expires_at\": \"1980-09-20T23:46:18.489Z\",\n        \"activated_at\": \"1972-06-04T13:33:17.024Z\",\n        \"store\": \"app_store\",\n        \"vendor_product_id\": \"string\",\n        \"will_renew\": false\n      }\n    },\n    \"subscriptions\": {\n      \"key_0\": {\n        \"is_active\": false,\n        \"vendor_product_id\": \"string\",\n        \"store\": \"string\",\n        \"expires_at\": \"2013-10-13T17:21:31.459Z\",\n        \"renewed_at\": \"1979-05-31T23:57:30.635Z\",\n        \"is_in_grace_period\": true,\n        \"is_sandbox\": false\n      },\n      \"key_1\": {\n        \"is_active\": false,\n        \"vendor_product_id\": \"string\",\n        \"store\": \"string\",\n        \"expires_at\": \"1981-06-17T14:59:18.437Z\",\n        \"renewed_at\": \"2003-01-27T09:03:22.257Z\",\n        \"is_in_grace_period\": true,\n        \"is_sandbox\": false\n      }\n    },\n    \"non_subscriptions\": {\n      \"key_0\": [\n        {\n          \"purchase_id\": \"string\",\n          \"vendor_product_id\": \"string\",\n          \"store\": \"string\",\n          \"purchased_at\": \"1984-05-27T23:01:17.002Z\",\n          \"is_consumable\": false,\n          \"is_refund\": true\n        },\n        {\n          \"purchase_id\": \"string\",\n          \"vendor_product_id\": \"string\",\n          \"store\": \"string\",\n          \"purchased_at\": \"1963-01-19T07:00:07.489Z\",\n          \"is_consumable\": false,\n          \"is_refund\": false\n        }\n      ],\n      \"key_1\": [\n        {\n          \"purchase_id\": \"string\",\n          \"vendor_product_id\": \"string\",\n          \"store\": \"string\",\n          \"purchased_at\": \"1997-08-11T09:32:14.473Z\",\n          \"is_consumable\": false,\n          \"is_refund\": false\n        },\n        {\n          \"purchase_id\": \"string\",\n          \"vendor_product_id\": \"string\",\n          \"store\": \"string\",\n          \"purchased_at\": \"1972-02-06T21:22:16.499Z\",\n          \"is_consumable\": true,\n          \"is_refund\": false\n        }\n      ]\n    },\n    \"custom_attributes\": {\n      \"key_0\": true,\n      \"key_1\": \"string\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "11dd2bda-e11e-4947-ae98-75e04c483a8a",
+          "name": "Revoke access level",
+          "request": {
+            "name": "Revoke access level",
+            "description": {
+              "content": "Revoke a previously granted access level from an end user.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "purchase",
+                "profile",
+                "revoke-access-level",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "The user's Adapty profile ID.",
+                "key": "adapty-profile-id",
+                "value": "<uuid>"
+              },
+              {
+                "disabled": false,
+                "description": "The user's ID in your own system.",
+                "key": "adapty-customer-user-id",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"access_level_id\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "7d6f5584-7605-4e7d-b86c-26eb382d30a7",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "purchase",
+                    "profile",
+                    "revoke-access-level",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The user's Adapty profile ID.",
+                    "key": "adapty-profile-id",
+                    "value": "<uuid>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The user's ID in your own system.",
+                    "key": "adapty-customer-user-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"access_level_id\": \"premium\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"profile_id\": \"48d21c84-aa6c-1181-932f-1f3d9c60d8c7\",\n    \"customer_user_id\": \"string\",\n    \"segment_hash\": \"string\",\n    \"access_levels\": {\n      \"key_0\": {\n        \"id\": \"premium\",\n        \"is_active\": false,\n        \"is_lifetime\": false,\n        \"expires_at\": \"1952-08-30T17:44:14.668Z\",\n        \"activated_at\": \"1990-08-22T05:10:53.685Z\",\n        \"store\": \"app_store\",\n        \"vendor_product_id\": \"string\",\n        \"will_renew\": false\n      },\n      \"key_1\": {\n        \"id\": \"premium\",\n        \"is_active\": false,\n        \"is_lifetime\": false,\n        \"expires_at\": \"1976-10-17T07:58:35.624Z\",\n        \"activated_at\": \"1991-12-01T20:37:35.150Z\",\n        \"store\": \"app_store\",\n        \"vendor_product_id\": \"string\",\n        \"will_renew\": true\n      },\n      \"key_2\": {\n        \"id\": \"premium\",\n        \"is_active\": true,\n        \"is_lifetime\": true,\n        \"expires_at\": \"2006-08-01T09:02:50.387Z\",\n        \"activated_at\": \"1982-03-09T22:35:14.652Z\",\n        \"store\": \"app_store\",\n        \"vendor_product_id\": \"string\",\n        \"will_renew\": true\n      },\n      \"key_3\": {\n        \"id\": \"premium\",\n        \"is_active\": true,\n        \"is_lifetime\": false,\n        \"expires_at\": \"1953-10-03T10:10:42.957Z\",\n        \"activated_at\": \"2017-01-24T23:17:45.882Z\",\n        \"store\": \"app_store\",\n        \"vendor_product_id\": \"string\",\n        \"will_renew\": true\n      }\n    },\n    \"subscriptions\": {\n      \"key_0\": {\n        \"is_active\": false,\n        \"vendor_product_id\": \"string\",\n        \"store\": \"string\",\n        \"expires_at\": \"1999-06-13T07:40:03.988Z\",\n        \"renewed_at\": \"1959-08-30T16:37:05.446Z\",\n        \"is_in_grace_period\": true,\n        \"is_sandbox\": true\n      },\n      \"key_1\": {\n        \"is_active\": true,\n        \"vendor_product_id\": \"string\",\n        \"store\": \"string\",\n        \"expires_at\": \"1985-01-21T13:43:34.169Z\",\n        \"renewed_at\": \"1994-06-25T02:38:00.572Z\",\n        \"is_in_grace_period\": false,\n        \"is_sandbox\": true\n      }\n    },\n    \"non_subscriptions\": {\n      \"key_0\": [\n        {\n          \"purchase_id\": \"string\",\n          \"vendor_product_id\": \"string\",\n          \"store\": \"string\",\n          \"purchased_at\": \"1954-09-22T14:30:44.474Z\",\n          \"is_consumable\": true,\n          \"is_refund\": true\n        },\n        {\n          \"purchase_id\": \"string\",\n          \"vendor_product_id\": \"string\",\n          \"store\": \"string\",\n          \"purchased_at\": \"2012-03-15T03:43:23.126Z\",\n          \"is_consumable\": false,\n          \"is_refund\": true\n        }\n      ]\n    },\n    \"custom_attributes\": {\n      \"key_0\": true,\n      \"key_1\": true,\n      \"key_2\": false,\n      \"key_3\": false\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.adapty.io/api/v2/server-side-api",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "b196caeb-7ea0-4c2b-9531-23e17050314d",
+    "name": "Adapty Server-Side Access Levels API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Representative OpenAPI description of the Adapty Server-Side REST API (v2). Adapty's core product is a mobile client SDK for paywalls, A/B testing, remote config, and receipt validation; this Server-Side API is the supporting REST surface for programmatically managing profiles, purchases and transactions, access levels (entitlements), and paywalls. Authenticate with a secret API key using the `Authorization: Api-Key <secret_key>` header, and address a profile with either the `adapty-profile-id` or `adapty-customer-user-id` request header. Endpoint paths are faithful to Adapty's published Server-Side API v2 reference; request/response bodies are representative.\n\nContact Support:\n Name: Adapty Support\n Email: support@adapty.io",
+      "type": "text/plain"
+    }
+  }
+}

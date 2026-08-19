@@ -1,0 +1,108 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Adapty Server-Side Access Levels Profiles API",
+    "version": "2.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Profiles",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get profile",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.adapty.io/api/v2/server-side-api/profile/",
+            "headers": [
+              {
+                "name": "adapty-profile-id",
+                "value": ""
+              },
+              {
+                "name": "adapty-customer-user-id",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Retrieve the end-user's profile including access levels, subscriptions, and non-subscriptions. Identify the profile with the `adapty-profile-id` or `adapty-customer-user-id` request header."
+        },
+        {
+          "info": {
+            "name": "Create profile",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.adapty.io/api/v2/server-side-api/profile/",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new end-user profile in Adapty."
+        },
+        {
+          "info": {
+            "name": "Update profile",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.adapty.io/api/v2/server-side-api/profile/",
+            "headers": [
+              {
+                "name": "adapty-profile-id",
+                "value": ""
+              },
+              {
+                "name": "adapty-customer-user-id",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update attributes on an existing end-user profile."
+        },
+        {
+          "info": {
+            "name": "Delete profile",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.adapty.io/api/v2/server-side-api/profile/",
+            "headers": [
+              {
+                "name": "adapty-profile-id",
+                "value": ""
+              },
+              {
+                "name": "adapty-customer-user-id",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Delete an end-user profile and its associated data."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

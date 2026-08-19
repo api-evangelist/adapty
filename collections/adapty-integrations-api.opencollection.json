@@ -1,0 +1,51 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Adapty Server-Side Access Levels Integrations API",
+    "version": "2.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Integrations",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Add integration identifiers",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.adapty.io/api/v2/server-side-api/profile/integration-identifiers/",
+            "headers": [
+              {
+                "name": "adapty-profile-id",
+                "value": ""
+              },
+              {
+                "name": "adapty-customer-user-id",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Attach third-party integration identifiers (e.g. AppsFlyer, Amplitude, Adjust, OneSignal) to an Adapty profile so subscription events can be reconciled across the customer's analytics and attribution stack."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

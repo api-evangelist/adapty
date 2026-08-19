@@ -1,0 +1,168 @@
+{
+  "item": [
+    {
+      "id": "50f3a54a-48ad-4bcd-a9b5-e320ab8a33b4",
+      "name": "Integrations",
+      "description": {
+        "content": "Attach third-party integration identifiers to a profile.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "250edc55-60f0-4e12-90a3-4a1e5613203b",
+          "name": "Add integration identifiers",
+          "request": {
+            "name": "Add integration identifiers",
+            "description": {
+              "content": "Attach third-party integration identifiers (e.g. AppsFlyer, Amplitude, Adjust, OneSignal) to an Adapty profile so subscription events can be reconciled across the customer's analytics and attribution stack.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "profile",
+                "integration-identifiers",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "The user's Adapty profile ID.",
+                "key": "adapty-profile-id",
+                "value": "<uuid>"
+              },
+              {
+                "disabled": false,
+                "description": "The user's ID in your own system.",
+                "key": "adapty-customer-user-id",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"integration_identifiers\": {\n    \"key_0\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "1cb746d4-79f8-49a1-9016-ac42baa799c1",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "profile",
+                    "integration-identifiers",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The user's Adapty profile ID.",
+                    "key": "adapty-profile-id",
+                    "value": "<uuid>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The user's ID in your own system.",
+                    "key": "adapty-customer-user-id",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"integration_identifiers\": {\n    \"appsflyer_id\": \"1234567890-1234567\",\n    \"amplitude_user_id\": \"user_42\",\n    \"one_signal_player_id\": \"8f2c...\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.adapty.io/api/v2/server-side-api",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "70fdabca-0244-4c96-b26f-05f080f400b5",
+    "name": "Adapty Server-Side Access Levels Integrations API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Representative OpenAPI description of the Adapty Server-Side REST API (v2). Adapty's core product is a mobile client SDK for paywalls, A/B testing, remote config, and receipt validation; this Server-Side API is the supporting REST surface for programmatically managing profiles, purchases and transactions, access levels (entitlements), and paywalls. Authenticate with a secret API key using the `Authorization: Api-Key <secret_key>` header, and address a profile with either the `adapty-profile-id` or `adapty-customer-user-id` request header. Endpoint paths are faithful to Adapty's published Server-Side API v2 reference; request/response bodies are representative.\n\nContact Support:\n Name: Adapty Support\n Email: support@adapty.io",
+      "type": "text/plain"
+    }
+  }
+}

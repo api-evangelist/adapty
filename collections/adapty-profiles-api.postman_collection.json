@@ -1,0 +1,475 @@
+{
+  "item": [
+    {
+      "id": "735ca17e-9981-477b-9ed7-918cb0f4ef37",
+      "name": "Profiles",
+      "description": {
+        "content": "Get, create, update, and delete end-user profiles.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "37c8ad60-f15d-4145-a1ea-b01be321e026",
+          "name": "Get profile",
+          "request": {
+            "name": "Get profile",
+            "description": {
+              "content": "Retrieve the end-user's profile including access levels, subscriptions, and non-subscriptions. Identify the profile with the `adapty-profile-id` or `adapty-customer-user-id` request header.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "profile",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "The user's Adapty profile ID.",
+                "key": "adapty-profile-id",
+                "value": "<uuid>"
+              },
+              {
+                "disabled": false,
+                "description": "The user's ID in your own system.",
+                "key": "adapty-customer-user-id",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f1728dd9-81c1-4863-bd5f-bdef1ce5dbae",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "profile",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The user's Adapty profile ID.",
+                    "key": "adapty-profile-id",
+                    "value": "<uuid>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The user's ID in your own system.",
+                    "key": "adapty-customer-user-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"profile_id\": \"5184773b-facc-57a5-0bd3-e762470919cb\",\n    \"customer_user_id\": \"string\",\n    \"segment_hash\": \"string\",\n    \"access_levels\": {\n      \"key_0\": {\n        \"id\": \"premium\",\n        \"is_active\": false,\n        \"is_lifetime\": true,\n        \"expires_at\": \"1991-10-29T12:52:08.351Z\",\n        \"activated_at\": \"1993-07-31T13:55:32.732Z\",\n        \"store\": \"app_store\",\n        \"vendor_product_id\": \"string\",\n        \"will_renew\": false\n      },\n      \"key_1\": {\n        \"id\": \"premium\",\n        \"is_active\": false,\n        \"is_lifetime\": true,\n        \"expires_at\": \"2006-04-10T18:53:34.313Z\",\n        \"activated_at\": \"1987-02-14T05:56:36.622Z\",\n        \"store\": \"app_store\",\n        \"vendor_product_id\": \"string\",\n        \"will_renew\": false\n      },\n      \"key_2\": {\n        \"id\": \"premium\",\n        \"is_active\": false,\n        \"is_lifetime\": false,\n        \"expires_at\": \"2021-07-25T21:50:45.189Z\",\n        \"activated_at\": \"1987-03-08T04:00:18.204Z\",\n        \"store\": \"app_store\",\n        \"vendor_product_id\": \"string\",\n        \"will_renew\": false\n      }\n    },\n    \"subscriptions\": {\n      \"key_0\": {\n        \"is_active\": false,\n        \"vendor_product_id\": \"string\",\n        \"store\": \"string\",\n        \"expires_at\": \"1974-01-11T17:00:08.053Z\",\n        \"renewed_at\": \"2019-04-23T22:48:12.155Z\",\n        \"is_in_grace_period\": false,\n        \"is_sandbox\": false\n      },\n      \"key_1\": {\n        \"is_active\": true,\n        \"vendor_product_id\": \"string\",\n        \"store\": \"string\",\n        \"expires_at\": \"1949-06-26T21:42:37.816Z\",\n        \"renewed_at\": \"1970-04-16T09:56:41.544Z\",\n        \"is_in_grace_period\": false,\n        \"is_sandbox\": false\n      }\n    },\n    \"non_subscriptions\": {\n      \"key_0\": [\n        {\n          \"purchase_id\": \"string\",\n          \"vendor_product_id\": \"string\",\n          \"store\": \"string\",\n          \"purchased_at\": \"1959-02-16T18:04:23.779Z\",\n          \"is_consumable\": false,\n          \"is_refund\": true\n        },\n        {\n          \"purchase_id\": \"string\",\n          \"vendor_product_id\": \"string\",\n          \"store\": \"string\",\n          \"purchased_at\": \"2007-04-08T07:32:08.786Z\",\n          \"is_consumable\": true,\n          \"is_refund\": false\n        }\n      ],\n      \"key_1\": [\n        {\n          \"purchase_id\": \"string\",\n          \"vendor_product_id\": \"string\",\n          \"store\": \"string\",\n          \"purchased_at\": \"1974-02-01T02:15:12.405Z\",\n          \"is_consumable\": true,\n          \"is_refund\": false\n        },\n        {\n          \"purchase_id\": \"string\",\n          \"vendor_product_id\": \"string\",\n          \"store\": \"string\",\n          \"purchased_at\": \"2023-09-01T20:12:28.479Z\",\n          \"is_consumable\": true,\n          \"is_refund\": false\n        }\n      ]\n    },\n    \"custom_attributes\": {\n      \"key_0\": 8976,\n      \"key_1\": \"string\",\n      \"key_2\": false\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c833d7e0-24fd-4fda-878f-652ba346c08e",
+          "name": "Create profile",
+          "request": {
+            "name": "Create profile",
+            "description": {
+              "content": "Create a new end-user profile in Adapty.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "profile",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"customer_user_id\": \"<string>\",\n  \"email\": \"<email>\",\n  \"custom_attributes\": {\n    \"key_0\": \"string\",\n    \"key_1\": 1061,\n    \"key_2\": 6416.593228518604\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "37dcdbe4-53ee-4047-b712-7bde92ab6177",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "profile",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"customer_user_id\": \"<string>\",\n  \"email\": \"<email>\",\n  \"custom_attributes\": {\n    \"key_0\": true,\n    \"key_1\": \"string\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"profile_id\": \"85bbc34f-8a19-631c-fc3c-f92cff0c0053\",\n    \"customer_user_id\": \"string\",\n    \"segment_hash\": \"string\",\n    \"access_levels\": {\n      \"key_0\": {\n        \"id\": \"premium\",\n        \"is_active\": false,\n        \"is_lifetime\": false,\n        \"expires_at\": \"1958-09-01T04:12:17.680Z\",\n        \"activated_at\": \"2020-08-24T13:09:03.359Z\",\n        \"store\": \"app_store\",\n        \"vendor_product_id\": \"string\",\n        \"will_renew\": true\n      }\n    },\n    \"subscriptions\": {\n      \"key_0\": {\n        \"is_active\": true,\n        \"vendor_product_id\": \"string\",\n        \"store\": \"string\",\n        \"expires_at\": \"1954-10-09T01:23:39.588Z\",\n        \"renewed_at\": \"2014-05-03T09:13:14.087Z\",\n        \"is_in_grace_period\": false,\n        \"is_sandbox\": true\n      },\n      \"key_1\": {\n        \"is_active\": false,\n        \"vendor_product_id\": \"string\",\n        \"store\": \"string\",\n        \"expires_at\": \"1977-08-05T00:35:11.139Z\",\n        \"renewed_at\": \"2008-09-26T23:45:08.495Z\",\n        \"is_in_grace_period\": true,\n        \"is_sandbox\": false\n      },\n      \"key_2\": {\n        \"is_active\": false,\n        \"vendor_product_id\": \"string\",\n        \"store\": \"string\",\n        \"expires_at\": \"1991-01-26T21:37:25.004Z\",\n        \"renewed_at\": \"2021-07-18T02:25:08.105Z\",\n        \"is_in_grace_period\": true,\n        \"is_sandbox\": false\n      }\n    },\n    \"non_subscriptions\": {\n      \"key_0\": [\n        {\n          \"purchase_id\": \"string\",\n          \"vendor_product_id\": \"string\",\n          \"store\": \"string\",\n          \"purchased_at\": \"1992-10-09T13:05:15.824Z\",\n          \"is_consumable\": true,\n          \"is_refund\": false\n        },\n        {\n          \"purchase_id\": \"string\",\n          \"vendor_product_id\": \"string\",\n          \"store\": \"string\",\n          \"purchased_at\": \"1946-11-26T08:53:27.190Z\",\n          \"is_consumable\": true,\n          \"is_refund\": true\n        }\n      ]\n    },\n    \"custom_attributes\": {\n      \"key_0\": 5345,\n      \"key_1\": true\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2174a92b-605b-4252-a4c5-0172e2ecc233",
+          "name": "Update profile",
+          "request": {
+            "name": "Update profile",
+            "description": {
+              "content": "Update attributes on an existing end-user profile.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "profile",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "The user's Adapty profile ID.",
+                "key": "adapty-profile-id",
+                "value": "<uuid>"
+              },
+              {
+                "disabled": false,
+                "description": "The user's ID in your own system.",
+                "key": "adapty-customer-user-id",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"<email>\",\n  \"phone_number\": \"<string>\",\n  \"custom_attributes\": {\n    \"key_0\": 6574.717024776706,\n    \"key_1\": \"string\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "b1cb1d0e-42e9-4000-8fd0-d5afe685bae7",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "profile",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The user's Adapty profile ID.",
+                    "key": "adapty-profile-id",
+                    "value": "<uuid>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The user's ID in your own system.",
+                    "key": "adapty-customer-user-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": \"<email>\",\n  \"phone_number\": \"<string>\",\n  \"custom_attributes\": {\n    \"key_0\": 2166,\n    \"key_1\": true\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"profile_id\": \"85bbc34f-8a19-631c-fc3c-f92cff0c0053\",\n    \"customer_user_id\": \"string\",\n    \"segment_hash\": \"string\",\n    \"access_levels\": {\n      \"key_0\": {\n        \"id\": \"premium\",\n        \"is_active\": false,\n        \"is_lifetime\": false,\n        \"expires_at\": \"1958-09-01T04:12:17.680Z\",\n        \"activated_at\": \"2020-08-24T13:09:03.359Z\",\n        \"store\": \"app_store\",\n        \"vendor_product_id\": \"string\",\n        \"will_renew\": true\n      }\n    },\n    \"subscriptions\": {\n      \"key_0\": {\n        \"is_active\": true,\n        \"vendor_product_id\": \"string\",\n        \"store\": \"string\",\n        \"expires_at\": \"1954-10-09T01:23:39.588Z\",\n        \"renewed_at\": \"2014-05-03T09:13:14.087Z\",\n        \"is_in_grace_period\": false,\n        \"is_sandbox\": true\n      },\n      \"key_1\": {\n        \"is_active\": false,\n        \"vendor_product_id\": \"string\",\n        \"store\": \"string\",\n        \"expires_at\": \"1977-08-05T00:35:11.139Z\",\n        \"renewed_at\": \"2008-09-26T23:45:08.495Z\",\n        \"is_in_grace_period\": true,\n        \"is_sandbox\": false\n      },\n      \"key_2\": {\n        \"is_active\": false,\n        \"vendor_product_id\": \"string\",\n        \"store\": \"string\",\n        \"expires_at\": \"1991-01-26T21:37:25.004Z\",\n        \"renewed_at\": \"2021-07-18T02:25:08.105Z\",\n        \"is_in_grace_period\": true,\n        \"is_sandbox\": false\n      }\n    },\n    \"non_subscriptions\": {\n      \"key_0\": [\n        {\n          \"purchase_id\": \"string\",\n          \"vendor_product_id\": \"string\",\n          \"store\": \"string\",\n          \"purchased_at\": \"1992-10-09T13:05:15.824Z\",\n          \"is_consumable\": true,\n          \"is_refund\": false\n        },\n        {\n          \"purchase_id\": \"string\",\n          \"vendor_product_id\": \"string\",\n          \"store\": \"string\",\n          \"purchased_at\": \"1946-11-26T08:53:27.190Z\",\n          \"is_consumable\": true,\n          \"is_refund\": true\n        }\n      ]\n    },\n    \"custom_attributes\": {\n      \"key_0\": 5345,\n      \"key_1\": true\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b3f67027-b42b-46e0-9148-00f49335d016",
+          "name": "Delete profile",
+          "request": {
+            "name": "Delete profile",
+            "description": {
+              "content": "Delete an end-user profile and its associated data.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "profile",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "The user's Adapty profile ID.",
+                "key": "adapty-profile-id",
+                "value": "<uuid>"
+              },
+              {
+                "disabled": false,
+                "description": "The user's ID in your own system.",
+                "key": "adapty-customer-user-id",
+                "value": "<string>"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ce233156-943e-4579-8df2-ad9319146773",
+              "name": "No Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "profile",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The user's Adapty profile ID.",
+                    "key": "adapty-profile-id",
+                    "value": "<uuid>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The user's ID in your own system.",
+                    "key": "adapty-customer-user-id",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.adapty.io/api/v2/server-side-api",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "deb45dc4-1028-4958-ac31-acf3af5821d5",
+    "name": "Adapty Server-Side Access Levels Profiles API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Representative OpenAPI description of the Adapty Server-Side REST API (v2). Adapty's core product is a mobile client SDK for paywalls, A/B testing, remote config, and receipt validation; this Server-Side API is the supporting REST surface for programmatically managing profiles, purchases and transactions, access levels (entitlements), and paywalls. Authenticate with a secret API key using the `Authorization: Api-Key <secret_key>` header, and address a profile with either the `adapty-profile-id` or `adapty-customer-user-id` request header. Endpoint paths are faithful to Adapty's published Server-Side API v2 reference; request/response bodies are representative.\n\nContact Support:\n Name: Adapty Support\n Email: support@adapty.io",
+      "type": "text/plain"
+    }
+  }
+}

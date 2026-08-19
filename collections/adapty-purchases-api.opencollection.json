@@ -1,0 +1,76 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Adapty Server-Side Access Levels Purchases API",
+    "version": "2.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Purchases",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Set transaction",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.adapty.io/api/v2/server-side-api/purchase/set-transaction/",
+            "headers": [
+              {
+                "name": "adapty-profile-id",
+                "value": ""
+              },
+              {
+                "name": "adapty-customer-user-id",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Record a transaction for a profile and grant the corresponding access level. Used to sync purchases originating outside the Adapty SDK."
+        },
+        {
+          "info": {
+            "name": "Validate Stripe purchase and import transaction history",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.adapty.io/api/v2/server-side-api/purchase/stripe/",
+            "headers": [
+              {
+                "name": "adapty-profile-id",
+                "value": ""
+              },
+              {
+                "name": "adapty-customer-user-id",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Validate a Stripe purchase, provide the resulting access level to the customer, and import their Stripe transaction history into Adapty."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

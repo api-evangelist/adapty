@@ -1,0 +1,79 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Adapty Server-Side Access Levels Paywalls API",
+    "version": "2.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Paywalls",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get paywall",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.adapty.io/api/v2/server-side-api/paywalls/:developer_id/",
+            "params": [
+              {
+                "name": "developer_id",
+                "value": "",
+                "type": "path",
+                "description": "The paywall placement / developer identifier."
+              }
+            ]
+          },
+          "docs": "Fetch a single paywall by its developer (placement) identifier."
+        },
+        {
+          "info": {
+            "name": "Update paywall",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.adapty.io/api/v2/server-side-api/paywalls/:developer_id/",
+            "params": [
+              {
+                "name": "developer_id",
+                "value": "",
+                "type": "path",
+                "description": "The paywall placement / developer identifier."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update the configuration of an existing paywall."
+        },
+        {
+          "info": {
+            "name": "List paywalls",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.adapty.io/api/v2/server-side-api/paywalls/"
+          },
+          "docs": "List all paywalls configured for the app."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

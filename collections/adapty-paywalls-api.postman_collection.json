@@ -1,0 +1,346 @@
+{
+  "item": [
+    {
+      "id": "85e48572-5712-4693-a060-df25e5d34478",
+      "name": "Paywalls",
+      "description": {
+        "content": "Read and update paywalls and their products.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "20f3b53b-7182-40b7-943f-931e69a458c2",
+          "name": "Get paywall",
+          "request": {
+            "name": "Get paywall",
+            "description": {
+              "content": "Fetch a single paywall by its developer (placement) identifier.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "paywalls",
+                ":developer_id",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "developer_id",
+                  "description": "(Required) The paywall placement / developer identifier."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b44485e0-b704-4b12-a5bb-fb70e5145a6e",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "paywalls",
+                    ":developer_id",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "developer_id",
+                      "description": "(Required) The paywall placement / developer identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"developer_id\": \"string\",\n  \"paywall_name\": \"string\",\n  \"revision\": 1821,\n  \"ab_test_name\": \"string\",\n  \"remote_config\": {\n    \"lang\": \"string\",\n    \"data\": {\n      \"key_0\": 3651.4141431883763,\n      \"key_1\": true\n    }\n  },\n  \"products\": [\n    {\n      \"vendor_product_id\": \"string\",\n      \"adapty_product_id\": \"string\",\n      \"store\": \"string\",\n      \"base_plan_id\": \"string\"\n    },\n    {\n      \"vendor_product_id\": \"string\",\n      \"adapty_product_id\": \"string\",\n      \"store\": \"string\",\n      \"base_plan_id\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1f6b5868-4859-4573-9626-56ec725f4a01",
+          "name": "Update paywall",
+          "request": {
+            "name": "Update paywall",
+            "description": {
+              "content": "Update the configuration of an existing paywall.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "paywalls",
+                ":developer_id",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "developer_id",
+                  "description": "(Required) The paywall placement / developer identifier."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"developer_id\": \"<string>\",\n  \"paywall_name\": \"<string>\",\n  \"revision\": \"<integer>\",\n  \"ab_test_name\": \"<string>\",\n  \"remote_config\": {\n    \"lang\": \"<string>\",\n    \"data\": {\n      \"key_0\": true,\n      \"key_1\": true\n    }\n  },\n  \"products\": [\n    {\n      \"vendor_product_id\": \"<string>\",\n      \"adapty_product_id\": \"<string>\",\n      \"store\": \"<string>\",\n      \"base_plan_id\": \"<string>\"\n    },\n    {\n      \"vendor_product_id\": \"<string>\",\n      \"adapty_product_id\": \"<string>\",\n      \"store\": \"<string>\",\n      \"base_plan_id\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "6836ad2d-6433-4ad8-845d-2adde24f51a5",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "paywalls",
+                    ":developer_id",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "developer_id",
+                      "description": "(Required) The paywall placement / developer identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"developer_id\": \"<string>\",\n  \"paywall_name\": \"<string>\",\n  \"revision\": \"<integer>\",\n  \"ab_test_name\": \"<string>\",\n  \"remote_config\": {\n    \"lang\": \"<string>\",\n    \"data\": {\n      \"key_0\": \"string\",\n      \"key_1\": \"string\"\n    }\n  },\n  \"products\": [\n    {\n      \"vendor_product_id\": \"<string>\",\n      \"adapty_product_id\": \"<string>\",\n      \"store\": \"<string>\",\n      \"base_plan_id\": \"<string>\"\n    },\n    {\n      \"vendor_product_id\": \"<string>\",\n      \"adapty_product_id\": \"<string>\",\n      \"store\": \"<string>\",\n      \"base_plan_id\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"developer_id\": \"<string>\",\n  \"paywall_name\": \"<string>\",\n  \"revision\": \"<integer>\",\n  \"ab_test_name\": \"<string>\",\n  \"remote_config\": {\n    \"lang\": \"<string>\",\n    \"data\": {\n      \"key_0\": \"string\",\n      \"key_1\": \"string\"\n    }\n  },\n  \"products\": [\n    {\n      \"vendor_product_id\": \"<string>\",\n      \"adapty_product_id\": \"<string>\",\n      \"store\": \"<string>\",\n      \"base_plan_id\": \"<string>\"\n    },\n    {\n      \"vendor_product_id\": \"<string>\",\n      \"adapty_product_id\": \"<string>\",\n      \"store\": \"<string>\",\n      \"base_plan_id\": \"<string>\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3459f8e3-ecb7-4cd0-bfaa-4ef43b388fc2",
+          "name": "List paywalls",
+          "request": {
+            "name": "List paywalls",
+            "description": {
+              "content": "List all paywalls configured for the app.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "paywalls",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6f81bd38-e173-4087-abee-8e228471558c",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "paywalls",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"developer_id\": \"<string>\",\n      \"paywall_name\": \"<string>\",\n      \"revision\": \"<integer>\",\n      \"ab_test_name\": \"<string>\",\n      \"remote_config\": {\n        \"lang\": \"<string>\",\n        \"data\": {\n          \"key_0\": false,\n          \"key_1\": 3658.0923449240177,\n          \"key_2\": 6622.598247693398\n        }\n      },\n      \"products\": [\n        {\n          \"vendor_product_id\": \"<string>\",\n          \"adapty_product_id\": \"<string>\",\n          \"store\": \"<string>\",\n          \"base_plan_id\": \"<string>\"\n        },\n        {\n          \"vendor_product_id\": \"<string>\",\n          \"adapty_product_id\": \"<string>\",\n          \"store\": \"<string>\",\n          \"base_plan_id\": \"<string>\"\n        }\n      ]\n    },\n    {\n      \"developer_id\": \"<string>\",\n      \"paywall_name\": \"<string>\",\n      \"revision\": \"<integer>\",\n      \"ab_test_name\": \"<string>\",\n      \"remote_config\": {\n        \"lang\": \"<string>\",\n        \"data\": {\n          \"key_0\": \"string\",\n          \"key_1\": \"string\"\n        }\n      },\n      \"products\": [\n        {\n          \"vendor_product_id\": \"<string>\",\n          \"adapty_product_id\": \"<string>\",\n          \"store\": \"<string>\",\n          \"base_plan_id\": \"<string>\"\n        },\n        {\n          \"vendor_product_id\": \"<string>\",\n          \"adapty_product_id\": \"<string>\",\n          \"store\": \"<string>\",\n          \"base_plan_id\": \"<string>\"\n        }\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.adapty.io/api/v2/server-side-api",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "5f21f043-8a45-4c05-b3ec-ad12dc766c08",
+    "name": "Adapty Server-Side Access Levels Paywalls API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Representative OpenAPI description of the Adapty Server-Side REST API (v2). Adapty's core product is a mobile client SDK for paywalls, A/B testing, remote config, and receipt validation; this Server-Side API is the supporting REST surface for programmatically managing profiles, purchases and transactions, access levels (entitlements), and paywalls. Authenticate with a secret API key using the `Authorization: Api-Key <secret_key>` header, and address a profile with either the `adapty-profile-id` or `adapty-customer-user-id` request header. Endpoint paths are faithful to Adapty's published Server-Side API v2 reference; request/response bodies are representative.\n\nContact Support:\n Name: Adapty Support\n Email: support@adapty.io",
+      "type": "text/plain"
+    }
+  }
+}

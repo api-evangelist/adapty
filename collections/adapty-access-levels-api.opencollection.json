@@ -1,0 +1,76 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Adapty Server-Side Access Levels API",
+    "version": "2.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Access Levels",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Grant access level",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.adapty.io/api/v2/server-side-api/purchase/profile/grant-access-level/",
+            "headers": [
+              {
+                "name": "adapty-profile-id",
+                "value": ""
+              },
+              {
+                "name": "adapty-customer-user-id",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Grant a specific access level to an end user without providing a transaction. Useful for promotions, support grants, and cross-platform entitlement syncing."
+        },
+        {
+          "info": {
+            "name": "Revoke access level",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.adapty.io/api/v2/server-side-api/purchase/profile/revoke-access-level/",
+            "headers": [
+              {
+                "name": "adapty-profile-id",
+                "value": ""
+              },
+              {
+                "name": "adapty-customer-user-id",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Revoke a previously granted access level from an end user."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

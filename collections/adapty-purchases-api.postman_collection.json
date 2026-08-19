@@ -1,0 +1,303 @@
+{
+  "item": [
+    {
+      "id": "21435f1d-cd92-433c-82e8-d5eb3887ebfc",
+      "name": "Purchases",
+      "description": {
+        "content": "Set transactions and validate store/Stripe purchases.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "4beb26f4-f5ef-45e9-9d39-ba25845cd93f",
+          "name": "Set transaction",
+          "request": {
+            "name": "Set transaction",
+            "description": {
+              "content": "Record a transaction for a profile and grant the corresponding access level. Used to sync purchases originating outside the Adapty SDK.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "purchase",
+                "set-transaction",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "The user's Adapty profile ID.",
+                "key": "adapty-profile-id",
+                "value": "<uuid>"
+              },
+              {
+                "disabled": false,
+                "description": "The user's ID in your own system.",
+                "key": "adapty-customer-user-id",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"store\": \"<string>\",\n  \"transaction_id\": \"<string>\",\n  \"vendor_product_id\": \"<string>\",\n  \"original_transaction_id\": \"<string>\",\n  \"price\": \"<number>\",\n  \"currency\": \"<string>\",\n  \"purchased_at\": \"<dateTime>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "e72d6480-f542-48d2-bf4f-bf1e2b4deae2",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "purchase",
+                    "set-transaction",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The user's Adapty profile ID.",
+                    "key": "adapty-profile-id",
+                    "value": "<uuid>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The user's ID in your own system.",
+                    "key": "adapty-customer-user-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"store\": \"<string>\",\n  \"transaction_id\": \"<string>\",\n  \"vendor_product_id\": \"<string>\",\n  \"original_transaction_id\": \"<string>\",\n  \"price\": \"<number>\",\n  \"currency\": \"USD\",\n  \"purchased_at\": \"<dateTime>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"profile_id\": \"106b756f-060d-fb0e-e387-75d4d3d4f7f8\",\n    \"customer_user_id\": \"string\",\n    \"segment_hash\": \"string\",\n    \"access_levels\": {\n      \"key_0\": {\n        \"id\": \"premium\",\n        \"is_active\": true,\n        \"is_lifetime\": true,\n        \"expires_at\": \"2002-12-17T07:34:22.880Z\",\n        \"activated_at\": \"2018-01-09T13:16:41.539Z\",\n        \"store\": \"app_store\",\n        \"vendor_product_id\": \"string\",\n        \"will_renew\": false\n      },\n      \"key_1\": {\n        \"id\": \"premium\",\n        \"is_active\": true,\n        \"is_lifetime\": true,\n        \"expires_at\": \"1957-08-07T15:15:29.321Z\",\n        \"activated_at\": \"1998-03-13T17:27:04.958Z\",\n        \"store\": \"app_store\",\n        \"vendor_product_id\": \"string\",\n        \"will_renew\": false\n      }\n    },\n    \"subscriptions\": {\n      \"key_0\": {\n        \"is_active\": false,\n        \"vendor_product_id\": \"string\",\n        \"store\": \"string\",\n        \"expires_at\": \"1957-03-09T01:54:27.331Z\",\n        \"renewed_at\": \"1965-01-06T16:04:22.269Z\",\n        \"is_in_grace_period\": true,\n        \"is_sandbox\": false\n      },\n      \"key_1\": {\n        \"is_active\": true,\n        \"vendor_product_id\": \"string\",\n        \"store\": \"string\",\n        \"expires_at\": \"1950-06-11T13:51:31.601Z\",\n        \"renewed_at\": \"2003-03-01T07:44:10.410Z\",\n        \"is_in_grace_period\": false,\n        \"is_sandbox\": true\n      },\n      \"key_2\": {\n        \"is_active\": false,\n        \"vendor_product_id\": \"string\",\n        \"store\": \"string\",\n        \"expires_at\": \"2015-07-10T21:03:53.116Z\",\n        \"renewed_at\": \"1995-06-09T08:33:20.930Z\",\n        \"is_in_grace_period\": true,\n        \"is_sandbox\": false\n      }\n    },\n    \"non_subscriptions\": {\n      \"key_0\": [\n        {\n          \"purchase_id\": \"string\",\n          \"vendor_product_id\": \"string\",\n          \"store\": \"string\",\n          \"purchased_at\": \"1998-02-25T18:16:30.638Z\",\n          \"is_consumable\": false,\n          \"is_refund\": false\n        },\n        {\n          \"purchase_id\": \"string\",\n          \"vendor_product_id\": \"string\",\n          \"store\": \"string\",\n          \"purchased_at\": \"1970-09-30T16:45:25.591Z\",\n          \"is_consumable\": true,\n          \"is_refund\": true\n        }\n      ],\n      \"key_1\": [\n        {\n          \"purchase_id\": \"string\",\n          \"vendor_product_id\": \"string\",\n          \"store\": \"string\",\n          \"purchased_at\": \"1958-10-07T03:33:15.292Z\",\n          \"is_consumable\": true,\n          \"is_refund\": false\n        },\n        {\n          \"purchase_id\": \"string\",\n          \"vendor_product_id\": \"string\",\n          \"store\": \"string\",\n          \"purchased_at\": \"2011-01-15T05:11:08.701Z\",\n          \"is_consumable\": false,\n          \"is_refund\": false\n        }\n      ],\n      \"key_2\": [\n        {\n          \"purchase_id\": \"string\",\n          \"vendor_product_id\": \"string\",\n          \"store\": \"string\",\n          \"purchased_at\": \"2006-01-06T13:14:35.777Z\",\n          \"is_consumable\": true,\n          \"is_refund\": true\n        },\n        {\n          \"purchase_id\": \"string\",\n          \"vendor_product_id\": \"string\",\n          \"store\": \"string\",\n          \"purchased_at\": \"1988-11-05T12:21:59.685Z\",\n          \"is_consumable\": true,\n          \"is_refund\": true\n        }\n      ],\n      \"key_3\": [\n        {\n          \"purchase_id\": \"string\",\n          \"vendor_product_id\": \"string\",\n          \"store\": \"string\",\n          \"purchased_at\": \"1947-04-20T08:26:15.903Z\",\n          \"is_consumable\": false,\n          \"is_refund\": true\n        },\n        {\n          \"purchase_id\": \"string\",\n          \"vendor_product_id\": \"string\",\n          \"store\": \"string\",\n          \"purchased_at\": \"1999-04-13T09:22:30.016Z\",\n          \"is_consumable\": true,\n          \"is_refund\": true\n        }\n      ]\n    },\n    \"custom_attributes\": {\n      \"key_0\": 6006,\n      \"key_1\": 780.2332768329967\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "53bda7d5-ed89-402a-9ffc-ac7eb4db82c4",
+          "name": "Validate Stripe purchase and import transaction history",
+          "request": {
+            "name": "Validate Stripe purchase and import transaction history",
+            "description": {
+              "content": "Validate a Stripe purchase, provide the resulting access level to the customer, and import their Stripe transaction history into Adapty.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "purchase",
+                "stripe",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "The user's Adapty profile ID.",
+                "key": "adapty-profile-id",
+                "value": "<uuid>"
+              },
+              {
+                "disabled": false,
+                "description": "The user's ID in your own system.",
+                "key": "adapty-customer-user-id",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"stripe_customer_id\": \"<string>\",\n  \"stripe_subscription_id\": \"<string>\",\n  \"stripe_payment_intent_id\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "defbfb61-4c4a-4a7d-a6f8-466d8f51e7fe",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "purchase",
+                    "stripe",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The user's Adapty profile ID.",
+                    "key": "adapty-profile-id",
+                    "value": "<uuid>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The user's ID in your own system.",
+                    "key": "adapty-customer-user-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"stripe_customer_id\": \"<string>\",\n  \"stripe_subscription_id\": \"<string>\",\n  \"stripe_payment_intent_id\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"profile_id\": \"addff477-e140-e333-c0ef-a370c969c571\",\n    \"customer_user_id\": \"string\",\n    \"segment_hash\": \"string\",\n    \"access_levels\": {\n      \"key_0\": {\n        \"id\": \"premium\",\n        \"is_active\": true,\n        \"is_lifetime\": false,\n        \"expires_at\": \"1976-02-19T20:37:49.923Z\",\n        \"activated_at\": \"1956-03-16T13:54:07.331Z\",\n        \"store\": \"app_store\",\n        \"vendor_product_id\": \"string\",\n        \"will_renew\": true\n      },\n      \"key_1\": {\n        \"id\": \"premium\",\n        \"is_active\": true,\n        \"is_lifetime\": false,\n        \"expires_at\": \"1952-10-22T20:58:00.291Z\",\n        \"activated_at\": \"1973-05-03T14:24:32.756Z\",\n        \"store\": \"app_store\",\n        \"vendor_product_id\": \"string\",\n        \"will_renew\": false\n      }\n    },\n    \"subscriptions\": {\n      \"key_0\": {\n        \"is_active\": true,\n        \"vendor_product_id\": \"string\",\n        \"store\": \"string\",\n        \"expires_at\": \"2003-12-19T14:15:09.770Z\",\n        \"renewed_at\": \"2003-03-04T01:22:19.316Z\",\n        \"is_in_grace_period\": false,\n        \"is_sandbox\": true\n      },\n      \"key_1\": {\n        \"is_active\": true,\n        \"vendor_product_id\": \"string\",\n        \"store\": \"string\",\n        \"expires_at\": \"2017-08-25T17:20:47.859Z\",\n        \"renewed_at\": \"1951-01-15T11:45:37.059Z\",\n        \"is_in_grace_period\": false,\n        \"is_sandbox\": false\n      }\n    },\n    \"non_subscriptions\": {\n      \"key_0\": [\n        {\n          \"purchase_id\": \"string\",\n          \"vendor_product_id\": \"string\",\n          \"store\": \"string\",\n          \"purchased_at\": \"1967-03-20T06:02:30.019Z\",\n          \"is_consumable\": true,\n          \"is_refund\": true\n        },\n        {\n          \"purchase_id\": \"string\",\n          \"vendor_product_id\": \"string\",\n          \"store\": \"string\",\n          \"purchased_at\": \"1962-05-22T09:25:46.898Z\",\n          \"is_consumable\": false,\n          \"is_refund\": true\n        }\n      ],\n      \"key_1\": [\n        {\n          \"purchase_id\": \"string\",\n          \"vendor_product_id\": \"string\",\n          \"store\": \"string\",\n          \"purchased_at\": \"2005-06-06T10:16:05.012Z\",\n          \"is_consumable\": true,\n          \"is_refund\": false\n        },\n        {\n          \"purchase_id\": \"string\",\n          \"vendor_product_id\": \"string\",\n          \"store\": \"string\",\n          \"purchased_at\": \"1957-03-17T19:29:49.469Z\",\n          \"is_consumable\": false,\n          \"is_refund\": true\n        }\n      ]\n    },\n    \"custom_attributes\": {\n      \"key_0\": 1869,\n      \"key_1\": 9271\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.adapty.io/api/v2/server-side-api",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "d1406023-c739-4a9f-9d96-f16ad1e82973",
+    "name": "Adapty Server-Side Access Levels Purchases API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Representative OpenAPI description of the Adapty Server-Side REST API (v2). Adapty's core product is a mobile client SDK for paywalls, A/B testing, remote config, and receipt validation; this Server-Side API is the supporting REST surface for programmatically managing profiles, purchases and transactions, access levels (entitlements), and paywalls. Authenticate with a secret API key using the `Authorization: Api-Key <secret_key>` header, and address a profile with either the `adapty-profile-id` or `adapty-customer-user-id` request header. Endpoint paths are faithful to Adapty's published Server-Side API v2 reference; request/response bodies are representative.\n\nContact Support:\n Name: Adapty Support\n Email: support@adapty.io",
+      "type": "text/plain"
+    }
+  }
+}
