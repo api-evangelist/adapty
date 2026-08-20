@@ -24,6 +24,12 @@ accessModel:
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/adapty.png
 tags:
 - Mobile
+- Subscription
+- In-App Purchases
+- Paywalls
+- Analytics
+tags_raw:
+- Mobile
 - Subscriptions
 - In-App Purchases
 - Paywalls
@@ -35,6 +41,10 @@ apis:
 - aid: adapty:adapty-webhooks
   name: Adapty Webhooks
   tags:
+  - Webhook
+  - Event
+  - Subscription Lifecycle
+  tags_raw:
   - Webhooks
   - Events
   - Subscription Lifecycle
@@ -82,6 +92,8 @@ apis:
   humanURL: https://adapty.io/docs/getting-started-with-server-side-api
   baseURL: https://api.adapty.io/api/v2/server-side-api
   tags:
+  - Integration
+  tags_raw:
   - Integrations
   properties:
   - type: OpenAPI
