@@ -8,6 +8,18 @@ description: Adapty is a mobile in-app subscription platform for iOS, Android, F
   REST API for programmatically managing profiles, purchases and transactions,
   access levels (entitlements), and paywalls, plus webhooks and integrations for
   streaming subscription events to downstream analytics and marketing tools.
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: paid
   onboarding: self-serve
