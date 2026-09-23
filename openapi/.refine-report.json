@@ -1,11 +1,7 @@
 {
   "provider": "adapty",
   "sources": [
-    "adapty-access-levels-api-openapi.yml",
-    "adapty-integrations-api-openapi.yml",
-    "adapty-paywalls-api-openapi.yml",
-    "adapty-profiles-api-openapi.yml",
-    "adapty-purchases-api-openapi.yml"
+    "_original/adapty-openapi.yml"
   ],
   "outputs": [
     "adapty-access-levels-api-openapi.yml",
@@ -17,6 +13,16 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "adapty-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "adapty-access-levels-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "adapty-integrations-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "adapty-paywalls-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "adapty-profiles-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "adapty-purchases-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

@@ -1,7 +1,7 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Adapty Server-Side Access Levels Purchases API
-  description: 'Representative OpenAPI description of the Adapty Server-Side REST API (v2). Adapty''s core product is a mobile client SDK for paywalls, A/B testing, remote config, and receipt validation; this Server-Side API is the supporting REST surface for programmatically managing profiles, purchases and transactions, access levels (entitlements), and paywalls. Authenticate with a secret API key using the `Authorization: Api-Key <secret_key>` header, and address a profile with either the `adapty-profile-id` or `adapty-customer-user-id` request header. Endpoint paths are faithful to Adapty''s published Server-Side API v2 reference; request/response bodies are representative.'
+  title: Adapty Server-Side Purchases API
+  description: Representative OpenAPI description of the Adapty Server-Side REST API (v2).
   termsOfService: https://adapty.io/terms/
   contact:
     name: Adapty Support
@@ -65,56 +65,33 @@ paths:
                 $ref: '#/components/schemas/ProfileResponse'
 components:
   schemas:
-    Subscription:
+    NonSubscription:
       type: object
       properties:
-        is_active:
-          type: boolean
+        purchase_id:
+          type: string
         vendor_product_id:
           type: string
         store:
           type: string
-        expires_at:
+        purchased_at:
           type: string
           format: date-time
-          nullable: true
-        renewed_at:
-          type: string
-          format: date-time
-          nullable: true
-        is_in_grace_period:
+        is_consumable:
           type: boolean
-        is_sandbox:
+        is_refund:
           type: boolean
-    AccessLevel:
+    StripePurchaseRequest:
       type: object
+      required:
+      - stripe_customer_id
       properties:
-        id:
+        stripe_customer_id:
           type: string
-          example: premium
-        is_active:
-          type: boolean
-        is_lifetime:
-          type: boolean
-        expires_at:
+        stripe_subscription_id:
           type: string
-          format: date-time
-          nullable: true
-        activated_at:
+        stripe_payment_intent_id:
           type: string
-          format: date-time
-        store:
-          type: string
-          example: app_store
-        vendor_product_id:
-          type: string
-        will_renew:
-          type: boolean
-    ProfileResponse:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/Profile'
     Profile:
       type: object
       properties:
@@ -122,8 +99,9 @@ components:
           type: string
           format: uuid
         customer_user_id:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         segment_hash:
           type: string
         access_levels:
@@ -143,32 +121,53 @@ components:
         custom_attributes:
           type: object
           additionalProperties: true
-    StripePurchaseRequest:
-      type: object
-      required:
-      - stripe_customer_id
-      properties:
-        stripe_customer_id:
-          type: string
-        stripe_subscription_id:
-          type: string
-        stripe_payment_intent_id:
-          type: string
-    NonSubscription:
+    Subscription:
       type: object
       properties:
-        purchase_id:
-          type: string
+        is_active:
+          type: boolean
         vendor_product_id:
           type: string
         store:
           type: string
-        purchased_at:
+        expires_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        renewed_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        is_in_grace_period:
+          type: boolean
+        is_sandbox:
+          type: boolean
+    AccessLevel:
+      type: object
+      properties:
+        id:
+          type: string
+          example: premium
+        is_active:
+          type: boolean
+        is_lifetime:
+          type: boolean
+        expires_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        activated_at:
           type: string
           format: date-time
-        is_consumable:
-          type: boolean
-        is_refund:
+        store:
+          type: string
+          example: app_store
+        vendor_product_id:
+          type: string
+        will_renew:
           type: boolean
     SetTransactionRequest:
       type: object
@@ -197,7 +196,19 @@ components:
         purchased_at:
           type: string
           format: date-time
+    ProfileResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/Profile'
   parameters:
+    CustomerUserIdHeader:
+      name: adapty-customer-user-id
+      in: header
+      required: false
+      description: The user's ID in your own system.
+      schema:
+        type: string
     ProfileIdHeader:
       name: adapty-profile-id
       in: header
@@ -206,13 +217,6 @@ components:
       schema:
         type: string
         format: uuid
-    CustomerUserIdHeader:
-      name: adapty-customer-user-id
-      in: header
-      required: false
-      description: The user's ID in your own system.
-      schema:
-        type: string
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

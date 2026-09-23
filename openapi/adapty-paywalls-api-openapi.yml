@@ -1,7 +1,7 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Adapty Server-Side Access Levels Paywalls API
-  description: 'Representative OpenAPI description of the Adapty Server-Side REST API (v2). Adapty''s core product is a mobile client SDK for paywalls, A/B testing, remote config, and receipt validation; this Server-Side API is the supporting REST surface for programmatically managing profiles, purchases and transactions, access levels (entitlements), and paywalls. Authenticate with a secret API key using the `Authorization: Api-Key <secret_key>` header, and address a profile with either the `adapty-profile-id` or `adapty-customer-user-id` request header. Endpoint paths are faithful to Adapty''s published Server-Side API v2 reference; request/response bodies are representative.'
+  title: Adapty Server-Side Paywalls API
+  description: Representative OpenAPI description of the Adapty Server-Side REST API (v2).
   termsOfService: https://adapty.io/terms/
   contact:
     name: Adapty Support
@@ -119,8 +119,9 @@ components:
         store:
           type: string
         base_plan_id:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
   securitySchemes:
     ApiKeyAuth:
       type: apiKey
