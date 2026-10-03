@@ -65,77 +65,11 @@ paths:
                 $ref: '#/components/schemas/ProfileResponse'
 components:
   schemas:
-    RevokeAccessLevelRequest:
-      type: object
-      required:
-      - access_level_id
-      properties:
-        access_level_id:
-          type: string
-          example: premium
-    GrantAccessLevelRequest:
-      type: object
-      required:
-      - access_level_id
-      properties:
-        access_level_id:
-          type: string
-          example: premium
-        expires_at:
-          type:
-          - string
-          - 'null'
-          format: date-time
-        is_lifetime:
-          type: boolean
-        starts_at:
-          type: string
-          format: date-time
-    NonSubscription:
+    ProfileResponse:
       type: object
       properties:
-        purchase_id:
-          type: string
-        vendor_product_id:
-          type: string
-        store:
-          type: string
-        purchased_at:
-          type: string
-          format: date-time
-        is_consumable:
-          type: boolean
-        is_refund:
-          type: boolean
-    Profile:
-      type: object
-      properties:
-        profile_id:
-          type: string
-          format: uuid
-        customer_user_id:
-          type:
-          - string
-          - 'null'
-        segment_hash:
-          type: string
-        access_levels:
-          type: object
-          additionalProperties:
-            $ref: '#/components/schemas/AccessLevel'
-        subscriptions:
-          type: object
-          additionalProperties:
-            $ref: '#/components/schemas/Subscription'
-        non_subscriptions:
-          type: object
-          additionalProperties:
-            type: array
-            items:
-              $ref: '#/components/schemas/NonSubscription'
-        custom_attributes:
-          type: object
-          additionalProperties: true
+        data:
+          $ref: '#/components/schemas/Profile'
     Subscription:
       type: object
       properties:
@@ -184,12 +118,85 @@ components:
           type: string
         will_renew:
           type: boolean
-    ProfileResponse:
+    RevokeAccessLevelRequest:
+      type: object
+      required:
+      - access_level_id
+      properties:
+        access_level_id:
+          type: string
+          example: premium
+    NonSubscription:
       type: object
       properties:
-        data:
-          $ref: '#/components/schemas/Profile'
+        purchase_id:
+          type: string
+        vendor_product_id:
+          type: string
+        store:
+          type: string
+        purchased_at:
+          type: string
+          format: date-time
+        is_consumable:
+          type: boolean
+        is_refund:
+          type: boolean
+    GrantAccessLevelRequest:
+      type: object
+      required:
+      - access_level_id
+      properties:
+        access_level_id:
+          type: string
+          example: premium
+        expires_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        is_lifetime:
+          type: boolean
+        starts_at:
+          type: string
+          format: date-time
+    Profile:
+      type: object
+      properties:
+        profile_id:
+          type: string
+          format: uuid
+        customer_user_id:
+          type:
+          - string
+          - 'null'
+        segment_hash:
+          type: string
+        access_levels:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/AccessLevel'
+        subscriptions:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/Subscription'
+        non_subscriptions:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              $ref: '#/components/schemas/NonSubscription'
+        custom_attributes:
+          type: object
+          additionalProperties: true
   parameters:
+    CustomerUserIdHeader:
+      name: adapty-customer-user-id
+      in: header
+      required: false
+      description: The user's ID in your own system.
+      schema:
+        type: string
     ProfileIdHeader:
       name: adapty-profile-id
       in: header
@@ -198,13 +205,6 @@ components:
       schema:
         type: string
         format: uuid
-    CustomerUserIdHeader:
-      name: adapty-customer-user-id
-      in: header
-      required: false
-      description: The user's ID in your own system.
-      schema:
-        type: string
   securitySchemes:
     ApiKeyAuth:
       type: apiKey
