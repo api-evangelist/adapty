@@ -1,0 +1,24 @@
+slug: adapty
+provider: Adapty
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Software & Technology
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 1
+edges:
+- tag: Access Levels
+  spec_file: adapty-access-levels-api-openapi.yml
+  capability_id: BC-4240.70
+  capability_id_l1: BC-4240
+  capability_name: Entitlement Enforcement
+  confidence: 0.72
+  evidence: POST /purchase/profile/grant-access-level/ grantAccessLevel Grant access level; RevokeAccessLevelRequest
+  reason: Granting and revoking access levels (described by the vendor as entitlements) against a subscriber
+    profile is subscription entitlement resolution/enforcement; some ambiguity versus subscription modification.
