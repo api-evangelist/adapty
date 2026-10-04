@@ -89,34 +89,6 @@ paths:
           description: No Content
 components:
   schemas:
-    ProfileResponse:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/Profile'
-    Subscription:
-      type: object
-      properties:
-        is_active:
-          type: boolean
-        vendor_product_id:
-          type: string
-        store:
-          type: string
-        expires_at:
-          type:
-          - string
-          - 'null'
-          format: date-time
-        renewed_at:
-          type:
-          - string
-          - 'null'
-          format: date-time
-        is_in_grace_period:
-          type: boolean
-        is_sandbox:
-          type: boolean
     AccessLevel:
       type: object
       properties:
@@ -142,6 +114,45 @@ components:
           type: string
         will_renew:
           type: boolean
+    Subscription:
+      type: object
+      properties:
+        is_active:
+          type: boolean
+        vendor_product_id:
+          type: string
+        store:
+          type: string
+        expires_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        renewed_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        is_in_grace_period:
+          type: boolean
+        is_sandbox:
+          type: boolean
+    ProfileResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/Profile'
+    UpdateProfileRequest:
+      type: object
+      properties:
+        email:
+          type: string
+          format: email
+        phone_number:
+          type: string
+        custom_attributes:
+          type: object
+          additionalProperties: true
     NonSubscription:
       type: object
       properties:
@@ -158,17 +169,6 @@ components:
           type: boolean
         is_refund:
           type: boolean
-    UpdateProfileRequest:
-      type: object
-      properties:
-        email:
-          type: string
-          format: email
-        phone_number:
-          type: string
-        custom_attributes:
-          type: object
-          additionalProperties: true
     CreateProfileRequest:
       type: object
       properties:

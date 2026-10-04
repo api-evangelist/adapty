@@ -50,13 +50,6 @@ components:
             amplitude_user_id: user_42
             one_signal_player_id: 8f2c...
   parameters:
-    CustomerUserIdHeader:
-      name: adapty-customer-user-id
-      in: header
-      required: false
-      description: The user's ID in your own system.
-      schema:
-        type: string
     ProfileIdHeader:
       name: adapty-profile-id
       in: header
@@ -65,6 +58,13 @@ components:
       schema:
         type: string
         format: uuid
+    CustomerUserIdHeader:
+      name: adapty-customer-user-id
+      in: header
+      required: false
+      description: The user's ID in your own system.
+      schema:
+        type: string
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

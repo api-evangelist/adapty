@@ -65,34 +65,6 @@ paths:
                 $ref: '#/components/schemas/ProfileResponse'
 components:
   schemas:
-    ProfileResponse:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/Profile'
-    Subscription:
-      type: object
-      properties:
-        is_active:
-          type: boolean
-        vendor_product_id:
-          type: string
-        store:
-          type: string
-        expires_at:
-          type:
-          - string
-          - 'null'
-          format: date-time
-        renewed_at:
-          type:
-          - string
-          - 'null'
-          format: date-time
-        is_in_grace_period:
-          type: boolean
-        is_sandbox:
-          type: boolean
     AccessLevel:
       type: object
       properties:
@@ -118,6 +90,52 @@ components:
           type: string
         will_renew:
           type: boolean
+    Subscription:
+      type: object
+      properties:
+        is_active:
+          type: boolean
+        vendor_product_id:
+          type: string
+        store:
+          type: string
+        expires_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        renewed_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        is_in_grace_period:
+          type: boolean
+        is_sandbox:
+          type: boolean
+    ProfileResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/Profile'
+    GrantAccessLevelRequest:
+      type: object
+      required:
+      - access_level_id
+      properties:
+        access_level_id:
+          type: string
+          example: premium
+        expires_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        is_lifetime:
+          type: boolean
+        starts_at:
+          type: string
+          format: date-time
     RevokeAccessLevelRequest:
       type: object
       required:
@@ -142,24 +160,6 @@ components:
           type: boolean
         is_refund:
           type: boolean
-    GrantAccessLevelRequest:
-      type: object
-      required:
-      - access_level_id
-      properties:
-        access_level_id:
-          type: string
-          example: premium
-        expires_at:
-          type:
-          - string
-          - 'null'
-          format: date-time
-        is_lifetime:
-          type: boolean
-        starts_at:
-          type: string
-          format: date-time
     Profile:
       type: object
       properties:

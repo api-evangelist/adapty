@@ -65,6 +65,75 @@ paths:
                 $ref: '#/components/schemas/ProfileResponse'
 components:
   schemas:
+    AccessLevel:
+      type: object
+      properties:
+        id:
+          type: string
+          example: premium
+        is_active:
+          type: boolean
+        is_lifetime:
+          type: boolean
+        expires_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        activated_at:
+          type: string
+          format: date-time
+        store:
+          type: string
+          example: app_store
+        vendor_product_id:
+          type: string
+        will_renew:
+          type: boolean
+    Subscription:
+      type: object
+      properties:
+        is_active:
+          type: boolean
+        vendor_product_id:
+          type: string
+        store:
+          type: string
+        expires_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        renewed_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        is_in_grace_period:
+          type: boolean
+        is_sandbox:
+          type: boolean
+    ProfileResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/Profile'
+    NonSubscription:
+      type: object
+      properties:
+        purchase_id:
+          type: string
+        vendor_product_id:
+          type: string
+        store:
+          type: string
+        purchased_at:
+          type: string
+          format: date-time
+        is_consumable:
+          type: boolean
+        is_refund:
+          type: boolean
     StripePurchaseRequest:
       type: object
       required:
@@ -103,75 +172,6 @@ components:
         purchased_at:
           type: string
           format: date-time
-    ProfileResponse:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/Profile'
-    Subscription:
-      type: object
-      properties:
-        is_active:
-          type: boolean
-        vendor_product_id:
-          type: string
-        store:
-          type: string
-        expires_at:
-          type:
-          - string
-          - 'null'
-          format: date-time
-        renewed_at:
-          type:
-          - string
-          - 'null'
-          format: date-time
-        is_in_grace_period:
-          type: boolean
-        is_sandbox:
-          type: boolean
-    AccessLevel:
-      type: object
-      properties:
-        id:
-          type: string
-          example: premium
-        is_active:
-          type: boolean
-        is_lifetime:
-          type: boolean
-        expires_at:
-          type:
-          - string
-          - 'null'
-          format: date-time
-        activated_at:
-          type: string
-          format: date-time
-        store:
-          type: string
-          example: app_store
-        vendor_product_id:
-          type: string
-        will_renew:
-          type: boolean
-    NonSubscription:
-      type: object
-      properties:
-        purchase_id:
-          type: string
-        vendor_product_id:
-          type: string
-        store:
-          type: string
-        purchased_at:
-          type: string
-          format: date-time
-        is_consumable:
-          type: boolean
-        is_refund:
-          type: boolean
     Profile:
       type: object
       properties:
