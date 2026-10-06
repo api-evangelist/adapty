@@ -48,7 +48,7 @@ tags_raw:
 - Paywalls
 - Analytics
 created: '2026-07-01'
-modified: '2026-07-01'
+modified: '2026-10-06'
 specificationVersion: '0.23'
 apis:
 - aid: adapty:adapty-webhooks
@@ -206,6 +206,10 @@ apis:
   - type: Documentation
     url: https://adapty.io/docs/paywalls
 common:
+- url: https://adapty.io/blog/
+  type: Blog
+- url: https://adapty.io/blog/atom.xml
+  type: BlogRSS
 - type: CapabilityMap
   url: capabilities/adapty-capability-edges.yml
   name: Adapty Business Capability Map
