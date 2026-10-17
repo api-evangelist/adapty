@@ -85,6 +85,19 @@ paths:
                       $ref: '#/components/schemas/Paywall'
 components:
   schemas:
+    Product:
+      type: object
+      properties:
+        vendor_product_id:
+          type: string
+        adapty_product_id:
+          type: string
+        store:
+          type: string
+        base_plan_id:
+          type:
+          - string
+          - 'null'
     Paywall:
       type: object
       properties:
@@ -109,19 +122,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Product'
-    Product:
-      type: object
-      properties:
-        vendor_product_id:
-          type: string
-        adapty_product_id:
-          type: string
-        store:
-          type: string
-        base_plan_id:
-          type:
-          - string
-          - 'null'
   securitySchemes:
     ApiKeyAuth:
       type: apiKey
