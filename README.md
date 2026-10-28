@@ -1,4 +1,4 @@
-# Adapty (adapty)
+# Adapty
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,157 +66,125 @@
 
 Adapty is a mobile in-app subscription platform for iOS, Android, Flutter, React Native, and Unity apps. Its core is a client SDK for paywalls, A/B testing, remote config, and server-side receipt validation, backed by a supporting Server-Side REST API for programmatically managing profiles, purchases and transactions, access levels (entitlements), and paywalls, plus webhooks and integrations for streaming subscription events to downstream analytics and marketing tools.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/adapty/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/adapty/refs/heads/main/apis.yml)
+**Areas:** Mobile · Subscription · In-App Purchases · Paywalls · Analytics
 
-## Tags
+## Adapty on APIs.io
 
-- Mobile
-- Subscriptions
-- In-App Purchases
-- Paywalls
-- Analytics
+Everything profiled for Adapty is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/adapty/](https://apis.io/providers/adapty/)** — or go straight to one of the APIs or properties below.
 
-## Timestamps
+### APIs (6)
 
-- **Created:** 2026-07-01
-- **Modified:** 2026-07-01
+- [Adapty Webhooks](https://apis.io/apis/adapty/adapty-webhooks/) — Outbound webhooks that POST subscription lifecycle events (trial start, subscription started, renewed, billing issue, refund, access-level granted/revoked)…
+- [Adapty Access Levels API](https://apis.io/apis/adapty/adapty-access-levels-api/) — Grant and revoke access levels (entitlements) directly.
+- [Adapty Integrations API](https://apis.io/apis/adapty/adapty-integrations-api/) — Attach third-party integration identifiers to a profile.
+- [Adapty Paywalls API](https://apis.io/apis/adapty/adapty-paywalls-api/) — Read and update paywalls and their products.
+- [Adapty Profiles API](https://apis.io/apis/adapty/adapty-profiles-api/) — Get, create, update, and delete end-user profiles.
+- [Adapty Purchases API](https://apis.io/apis/adapty/adapty-purchases-api/) — Set transactions and validate store/Stripe purchases.
 
-## APIs
+### Published properties
 
-### Adapty Server-Side Profiles API
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-Programmatically get, create, update, and delete end-user profiles, addressing customers by Adapty profile ID or your own customer user ID and reading their access levels, subscriptions, and non-subscriptions.
+#### Agentic access (1)
 
-- **Human URL:** [https://adapty.io/docs/getting-started-with-server-side-api](https://adapty.io/docs/getting-started-with-server-side-api)
-- **Base URL:** `https://api.adapty.io/api/v2/server-side-api`
+Which operations an agent can call, which act, and which need a human in the loop.
 
-#### Tags
+- [Adapty Agentic Access](https://apis.io/agentic-access/adapty/adapty-agentic-access/)
 
-- Profiles
-- Customers
-- Server-Side
+#### Collections (6)
 
-#### Properties
+Postman and Open Collection request collections.
 
-- [Documentation](https://adapty.io/docs/getting-started-with-server-side-api)
-- [API Reference](https://adapty.io/docs/server-side-api-specs)
-- [OpenAPI](openapi/adapty-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/adapty.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/adapty.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [Adapty Server-Side API](https://apis.io/collections/adapty/open-adapty/)
+- [Adapty Server-Side Access Levels API](https://apis.io/collections/adapty/open-adapty-access-levels-api/)
+- [Adapty Server-Side Access Levels Integrations API](https://apis.io/collections/adapty/open-adapty-integrations-api/)
+- [Adapty Server-Side Access Levels Paywalls API](https://apis.io/collections/adapty/open-adapty-paywalls-api/)
+- [Adapty Server-Side Access Levels Profiles API](https://apis.io/collections/adapty/open-adapty-profiles-api/)
+- [Adapty Server-Side Access Levels Purchases API](https://apis.io/collections/adapty/open-adapty-purchases-api/)
 
-### Adapty Server-Side Purchases & Transactions API
+#### Security (2)
 
-Record transactions against a profile and validate Stripe purchases, granting the resulting access level and importing the customer's transaction history into Adapty for server-side (Stripe, web, and store) billing flows.
+Authentication, trust centre, and vulnerability disclosure.
 
-- **Human URL:** [https://adapty.io/docs/server-side-api-specs](https://adapty.io/docs/server-side-api-specs)
-- **Base URL:** `https://api.adapty.io/api/v2/server-side-api`
+- [Adapty Authentication](https://apis.io/security/adapty/adapty-authentication/)
+- [Adapty Domain Security](https://apis.io/security/adapty/adapty-domain-security/)
 
-#### Tags
+#### Plans and pricing (1)
 
-- Purchases
-- Transactions
-- Receipt Validation
+Published plans, tiers and prices.
 
-#### Properties
+- [Adapty Plans Pricing](https://apis.io/plans/adapty/adapty-plans-pricing/)
 
-- [Documentation](https://adapty.io/docs/server-side-api-specs)
-- [API Reference](https://adapty.io/docs/server-side-api-objects)
-- [OpenAPI](openapi/adapty-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/adapty.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/adapty.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+#### Rate limits (1)
 
-### Adapty Server-Side Access Levels API
+Published request limits.
 
-Grant and revoke access levels (entitlements) for a profile directly, without requiring a transaction, to unlock or remove paid features for promotions, support flows, and cross-platform entitlement syncing.
+- [Adapty Rate Limits](https://apis.io/rate-limits/adapty/adapty-rate-limits/)
 
-- **Human URL:** [https://adapty.io/docs/access-level](https://adapty.io/docs/access-level)
-- **Base URL:** `https://api.adapty.io/api/v2/server-side-api`
+#### FinOps (1)
 
-#### Tags
+What the API costs to run, by operation.
 
-- Access Levels
-- Entitlements
-- Server-Side
+- [Adapty Finops](https://apis.io/finops/adapty/adapty-finops/)
 
-#### Properties
+## Where to find this API
 
-- [Documentation](https://adapty.io/docs/access-level)
-- [API Reference](https://adapty.io/docs/server-side-api-specs)
-- [OpenAPI](openapi/adapty-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/adapty.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/adapty.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
 
-### Adapty Server-Side Paywalls & Products API
-
-Fetch a single paywall, list paywalls, and update paywall configuration server-side, retrieving the products and remote-config payload a client would otherwise resolve through the SDK.
-
-- **Human URL:** [https://adapty.io/docs/paywalls](https://adapty.io/docs/paywalls)
-- **Base URL:** `https://api.adapty.io/api/v2/server-side-api`
-
-#### Tags
-
-- Paywalls
-- Products
-- Remote Config
-
-#### Properties
-
-- [Documentation](https://adapty.io/docs/paywalls)
-- [API Reference](https://adapty.io/docs/server-side-api-specs)
-- [OpenAPI](openapi/adapty-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/adapty.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/adapty.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Adapty Server-Side Integrations API
-
-Attach third-party integration identifiers (analytics, attribution, and marketing tool IDs such as AppsFlyer, Amplitude, and Adjust) to an Adapty profile so subscription events can be reconciled across the customer's stack.
-
-- **Human URL:** [https://adapty.io/docs/getting-started-with-server-side-api](https://adapty.io/docs/getting-started-with-server-side-api)
-- **Base URL:** `https://api.adapty.io/api/v2/server-side-api`
-
-#### Tags
-
-- Integrations
-- Identifiers
-- Attribution
-
-#### Properties
-
-- [Documentation](https://adapty.io/docs/getting-started-with-server-side-api)
-- [API Reference](https://adapty.io/docs/server-side-api-specs)
-- [OpenAPI](openapi/adapty-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/adapty.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/adapty.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Adapty Webhooks
-
-Outbound webhooks that POST subscription lifecycle events (trial start, subscription started, renewed, billing issue, refund, access-level granted/revoked) to your endpoint in near real time for downstream analytics and messaging.
-
-- **Human URL:** [https://adapty.io/docs/webhook](https://adapty.io/docs/webhook)
-- **Base URL:** `https://api.adapty.io/api/v2/server-side-api`
-
-#### Tags
-
-- Webhooks
-- Events
-- Subscription Lifecycle
-
-#### Properties
-
-- [Documentation](https://adapty.io/docs/webhook)
-- [API Reference](https://adapty.io/docs/events)
-
-## Common Properties
-
-- [GitHub Organization](https://github.com/adaptyteam)
-- [LinkedIn](https://www.linkedin.com/company/adapty-io)
 - [Website](https://adapty.io/)
 - [Documentation](https://adapty.io/docs)
-- [Plans](plans/adapty-plans-pricing.yml)
-- [Rate Limits](rate-limits/adapty-rate-limits.yml)
-- [Fin Ops](finops/adapty-finops.yml)
+- [Blog](https://adapty.io/blog/)
+- [GitHub](https://github.com/adaptyteam)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+**Kin Score 27.4** — thin · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 66.1 |
+| Contract quality | 50.6 |
+| Contract governance | 0.0 |
+| Operational transparency | 10.5 |
+| Developer ergonomics | 32.1 |
+| Access clarity | 7.9 |
+
+**Agent readiness 17.9** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | — |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 11.8** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/adapty/](https://apis.io/providers/adapty/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Adapty: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/adapty/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
